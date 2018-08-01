@@ -1,0 +1,30 @@
+app:
+  build: .
+  command: sh docker/start.sh
+  volumes:
+    - .:/usr/src/app
+    - ./config/database.yml.default:/usr/src/app/config/database.yml
+    - "/share/uploads/logdatablog_uploads:/usr/src/app/public/uploads"
+    - ./bundle:/usr/local/bundle
+    - ./public:/usr/share/nginx/html
+    - tmp:/usr/src/app/tmp
+  env_file:
+    - database.env
+    - settings.env
+  environment:
+    RAILS_ENV: "${RAILS_ENV}"
+  restart: always
+  expose:
+    - "3000"
+nginx:
+  image: nginx
+  links:
+    - app
+  volumes:
+    - ./config/nginx.conf:/etc/nginx/nginx.conf
+    - ./public:/usr/share/nginx/html
+    - "/share/logs/logdatablog_${RAILS_ENV}:/usr/src/app/log"
+    - "/share/uploads/logdatablog_${RAILS_ENV}:/usr/share/nginx/html/uploads"
+  ports:
+    - "3000:80"
+  restart: always
