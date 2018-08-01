@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{ content: 'ext/html; charset=UTF-8', 'http-equiv': 'Content-Type' }
+    %title Logdatablog
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all',
+      'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    #main-container
+      #wrapper
+        = render 'sidebar'
+        #page-content-wrapper
+          .container-fluid
+            %span.hidden-print#sidebar-toggle
+              .sidebar-toggle{ 'data-link': '#wrapper' }
+                %i.fa.fa-angle-double-left
+            #main-content
+              = yield

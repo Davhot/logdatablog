@@ -1,0 +1,91 @@
+%aside.hidden-print#sidebar-wrapper
+  .sidebar-nav
+    #author-info
+      = image_tag 'a2', id: 'avatar'
+      %strong David
+      %p Join me
+      .social-media-icons
+        %ul
+          %li
+            %a.twitter{ href: 'https://vk.com/hot_dav', target: '_blank' }
+              %i.fa.fa-vk
+          %li
+            %a.facebook{ href: 'http://facebook.com/', target: '_blank' }
+              %i.fa.fa-facebook
+          %li
+            %a.instagram{ href: 'http://instagram.com/', target: '_blank' }
+              %i.fa.fa-instagram
+    %hr.sidebar-content-separate
+    .menu-container.menu-primary#menu-primary{ role: 'navigation' }
+      %nav.menu
+        %ul.menu-primary-items#menu-primary-items
+          %li
+            %a.link{ href: '' } Home
+          %li
+            %a.link{ href: '' } About
+          %li
+            %a.link{ href: '' } Contact
+    %hr.sidebar-content-separate/
+    #about-me
+      %h6 Обо мне
+      %p Разраб, студент и просто отличный парень
+    %hr.sidebar-content-separate/
+    %form
+      %input.form-control.ds-input#search-input{ autocomplete: 'off',
+        placeholder: 'Поиск...', type: 'search' }
+      %button{ type: 'submit' } Go
+    %hr.sidebar-content-separate/
+    %div
+      %h6 Последние посты
+      %ul.links-sidebar
+        %li
+          %a.link{ href: '' }
+            %p Регулярные выражения в Ruby
+        %li
+          %a.link{ href: '' }
+            %p Добавление файлов Ruby on Rails
+        %li
+          %a.link{ href: '' }
+            %p Пагинация и меняющийся title
+        %li
+          %a.link{ href: '' }
+            %p Добавление пользователей
+        %li
+          %a.link{ href: '' }
+            %p Модули и Примеси Ruby
+    %hr.sidebar-content-separate/
+    %div
+      %h6 Категории
+      %ul.links-sidebar
+        %li
+          %a.link{ href: '' }
+            %p Программирование (10)
+        %li
+          %a.link{ href: '' }
+            %p Системное администрирование (3)
+        %li
+          %a.link{ href: '' }
+            %p Литература (1)
+        %li
+          %a.link{ href: '' }
+            %p Тестирование (2)
+    %hr.sidebar-content-separate/
+    %div
+      %h6 Теги
+      %a{ href: '' }
+        %span.badge.badge-pill.badge-secondary Ruby
+      %a{ href: '' }
+        %span.badge.badge-pill.badge-secondary
+          Ruby on Rails
+          %span
+      %a{ href: '' }
+        %span.badge.badge-pill.badge-secondary C
+      %a{ href: '' }
+        %span.badge.badge-pill.badge-secondary Nginx
+      %a{ href: '' }
+        %span.badge.badge-pill.badge-secondary Markdown
+      %a{ href: '' }
+        %span.badge.badge-pill.badge-secondary Haskell
+    %hr.sidebar-content-separate
+    = image_tag 'log-data-logo-white.png', id: 'logo',
+      title: 'log-data-logo-white'

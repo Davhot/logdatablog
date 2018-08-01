@@ -1,0 +1,24 @@
+@import "main"
+@import "sidebar"
+
+#main-content
+  margin: 0
+  padding-top: 2em
+  margin-left: 2em
+  margin-right: 2em
+  z-index: 1
+.card-img-top
+  height: 300px
+  object-fit: contain
+
+.card
+  margin-bottom: 2em
+
+@include media-breakpoint-down(sm)
+  .card-img-top
+    height: 150px
+  #main-content
+    margin-left: 0
+    margin-right: 0
+  h1
+    font-size: 1.5em

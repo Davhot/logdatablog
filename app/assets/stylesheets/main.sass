@@ -1,0 +1,75 @@
+$avatar-size: 100px
+$sidebar-color: white
+
+$offset-main-content: 0
+$min-height-main-content: 90%
+
+// sidebar
+$navbar-inverse-bg: gray
+$sidebar-width: 300px
+$sidebar-bg: lighten(black, 20%)
+$sidebar-link-color: white
+$sidebar-link-hover-bg: lighten(black, 30%)
+$button-sidebar-background: #434343
+
+body
+  background-color: $white
+  width: 100%
+  font-family: "hanalei", sans-serif !important
+// плавное изменение ссылки кнопки при наведении
+.link
+  line-height: 1
+  display: inline-block
+  text-decoration: none
+  cursor: pointer
+
+.link:hover
+  text-decoration: none
+
+.link:after
+  display: block
+  content: ""
+  height: 2px
+  width: 0%
+  background-color: darken($sidebar-color, 30%)
+  transition: width .3s ease-in-out
+
+.link:hover:after,
+.link:focus:after
+  width: 100%
+
+button[type="submit"]
+  margin-top: 0.4em
+  padding: 0.2em
+  width: 100%
+  color: white
+  background: $button-sidebar-background
+  outline: none
+  border: none
+  border-radius: 0
+  font-family: "Lato", sans-serif
+  -webkit-appearance: none
+  -webkit-transition: background 0.2s ease-in-out
+  transition: background 0.2s ease-in-out
+  &:hover
+    background: lighten($button-sidebar-background, 10%)
+a, button
+  transition: background-color 0.2s 0s ease
+  -moz-transition: background-color 0.2s 0s ease
+  -o-transition: background-color 0.2s 0s ease
+  -webkit-transition: background-color 0.2s 0s ease
+// custom sidebar
+/* width */
+::-webkit-scrollbar
+    width: 5px
+/* Track */
+::-webkit-scrollbar-track
+    background: $white
+/* Handle */
+::-webkit-scrollbar-thumb
+    background: $sidebar-bg
+    border-radius: 1em
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover
+    background: lighten($sidebar-bg, 30%)

@@ -1,0 +1,144 @@
+// socials
+.social-media-icons
+  overflow: hidden
+  clear: both
+  width: 100%
+
+.social-media-icons ul
+  list-style: none
+  padding-top: 0
+  margin-top: 0.5em
+  display: flex
+  justify-content: center
+  padding-left: 0px
+
+.social-media-icons li
+  margin: 0px 8px
+
+.social-media-icons a
+  color: #CCCCCC
+  font-size: 1.5em
+  line-height: 1
+
+.social-media-icons a:link, .social-media-icons a:visited, .social-media-icons a:hover, .social-media-icons a:active, .social-media-icons a:focus
+  color: #CCCCCC
+
+// sidebar
+#main-container
+  min-height: $min-height-main-content !important
+  padding-top: $offset-main-content
+
+#wrapper
+  padding-left: 30px
+  transition: all 0.5s ease
+  #sidebar-toggle
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 100%
+    transition: all 0.5s ease
+    background-color: $sidebar-bg
+    padding: 3px 6px 3px 4px
+    font-size: 120%
+    border-radius: 0 10px 10px 0
+    position: fixed
+    left: 0
+    cursor: pointer
+    z-index: 1000
+    &:hover, &:active, &:focus, &.active
+      transition: all 0.5s ease
+      text-decoration: none
+      background: $sidebar-link-hover-bg
+    div
+      transition: all 0.5s ease
+      display: block
+      text-decoration: none
+      color: $sidebar-link-color
+  &.toggled
+    #sidebar-wrapper
+      width: $sidebar-width
+    #sidebar-toggle
+      left: $sidebar-width
+
+#sidebar-wrapper
+  z-index: 500
+  position: fixed
+  left: $sidebar-width
+  width: 0
+  height: 100%
+  margin-left: -$sidebar-width
+  overflow-y: auto
+  background-color: $sidebar-bg
+  transition: all 0.5s ease
+  p
+    color: darken($sidebar-color, 30%)
+    font-size: 0.9em
+    margin-bottom: 0.3em
+  &::-webkit-scrollbar
+    display: none
+
+@include media-breakpoint-up(sm)
+  #wrapper
+    padding-left: calc(#{$sidebar-width} + 30px)
+    &.toggled
+      padding-left: 30px
+      #sidebar-wrapper
+        width: 0
+      #page-content-wrapper
+        position: relative
+        margin-right: 0
+      #sidebar-toggle
+        left: 0
+    #sidebar-toggle
+      left: $sidebar-width
+  #sidebar-wrapper
+    width: $sidebar-width
+////////////////////////////////////////////////////////////////////////////////
+
+// sidebar content
+.sidebar-nav
+  margin-left: 1.5em
+
+.sidebar-content-separate
+  margin: 1em 0
+  // padding-bottom: 0.5em
+  border-top: 1px solid lighten($sidebar-bg, 10%)
+
+#author-info
+  color: $sidebar-color
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  strong
+    width: 100%
+    text-align: center
+  strong
+    font-size: 1.5em
+  #avatar
+    width: $avatar-size
+    height: $avatar-size
+    border-radius: 10em
+    margin: 1em
+    margin-top: 2em
+.sidebar-nav
+  color: white
+#menu-primary
+  ul
+    list-style: none
+    padding: 0
+  li
+    margin-top: 0.4em
+    font-size: 1.2em
+  a
+    color: $sidebar-color
+  a:hover
+    color: $sidebar-color
+
+.links-sidebar
+  list-style: none
+  padding-left: 0
+
+#logo
+  width: calc(#{$sidebar-width} - 50px)
+  height: auto
+  margin-bottom: 2em
