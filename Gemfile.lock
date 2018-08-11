@@ -84,7 +84,7 @@ GEM
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
-    i18n (1.0.1)
+    i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)

@@ -5,7 +5,7 @@ set :application, 'logdatablog'
 set :repo_url, 'https://github.com/Davhot/logdatablog.git'
 set :deploy_to, "/home/david/#{fetch(:application)}"
 set :linked_files, %w(database.env)
-set :linked_dirs, %w{ bundle log }
+set :linked_dirs, %w{ bundle }
 set :keep_releases, 3
 
 set :docker_role, :app
@@ -81,7 +81,6 @@ end
 
 
 before "docker:deploy:compose:start", "docker:compose:seed"
-before "docker:compose:seed"   ,  "docker:compose:migrate"
+before "docker:compose:seed",  "docker:compose:migrate"
 before "docker:compose:migrate", "docker:compose:assets"
-before "docker:compose:assets" , "docker:compose:bundle"
-before "docker:compose:bundle" , "docker:compose:pgbouncer"
+before "docker:compose:assets", "docker:compose:bundle"

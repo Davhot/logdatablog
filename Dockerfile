@@ -8,5 +8,9 @@ RUN apt-cache policy openssl libssl1.1
 RUN gem pristine --all
 
 RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/log
+
+RUN chmod 755 /usr/src/app/log
+RUN chmod 755 /usr/src/app
 
 WORKDIR /usr/src/app
