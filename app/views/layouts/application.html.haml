@@ -17,4 +17,7 @@
               .sidebar-toggle{ 'data-link': '#wrapper' }
                 %i.fa.fa-angle-double-left
             #main-content
+              .alert-row
+                .flash-messages
+                  = render 'flash'
               = yield

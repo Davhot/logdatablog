@@ -1,5 +1,7 @@
 %aside.hidden-print#sidebar-wrapper
   .sidebar-nav
+    = link_to 'Выход',
+      destroy_user_session_path, {class: 'log-out-icon'}
     #author-info
       = image_tag 'a2', id: 'avatar'
       %strong David

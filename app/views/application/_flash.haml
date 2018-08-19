@@ -1,0 +1,6 @@
+- flash.each do |key, value|
+  - if %(error alert notice success).include? key.to_s
+    %div{ class: flash_class(key), role: 'alert' }
+      %button.close{ name: 'button', type: 'button', 'data-dismiss': 'alert' }
+        ×
+      = value.html_safe
