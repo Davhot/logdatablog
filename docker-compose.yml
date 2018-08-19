@@ -8,6 +8,7 @@ app:
     - ./bundle:/usr/local/bundle
     - ./public:/usr/share/nginx/html
     - tmp:/usr/src/app/tmp
+    - "/var/run/postgresql:/var/run/postgresql"
   env_file:
     - database.env
   environment:

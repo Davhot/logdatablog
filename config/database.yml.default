@@ -3,7 +3,7 @@ default: &default
   encoding: unicode
   pool: 10
   timeout: 5000
-  port: ENV['DB_PORT'] %>
+  port: <%= ENV['DB_PORT'] %>
   database: <%= ENV['DB_DATABASE'] %>
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
