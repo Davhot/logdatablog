@@ -1,0 +1,19 @@
+- controller = params[:controller]
+- action = params[:action]
+- if @need_restful_breadcrumbs
+  .row
+    .col-md-12
+      %ul.breadcrumb
+        - case action
+        - when 'index'
+          %li.breadcrumb-item.active= t(controller + '.index')
+        - when 'show'
+          %li.breadcrumb-item= link_to t(controller + '.index'), '/' + controller
+          %li.breadcrumb-item.active= t(controller + '.show')
+        - when 'new', 'create'
+          %li.breadcrumb-item= link_to t(controller + '.index'), '/' + controller
+          %li.breadcrumb-item.active= t(controller + '.new')
+        - when 'edit', 'update'
+          %li.breadcrumb-item= link_to t(controller + '.index'), '/' + controller
+          %li.breadcrumb-item= link_to t(controller + '.index'), '/' + controller + '/' + @item.id
+          %li.breadcrumb-item.active= t(controller + '.new')

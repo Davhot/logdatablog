@@ -1,1 +1,7 @@
-%h1 index tags
+= link_to t('tags.new'), new_tag_path
+%h1= t('tags.index')
+
+%table
+  - for tag in @items do
+    %tr
+      %td= tag.name

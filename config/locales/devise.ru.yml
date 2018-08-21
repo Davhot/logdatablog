@@ -1,4 +1,11 @@
 ru:
+  activerecord:
+    attributes:
+      user:
+        login: Имя пользователя
+        password: "Пароль"
+        email: "E-mail"
+        remember_me: "Запомнить"
   errors:
     messages:
       expired: "устарела. Пожалуйста, запросите новую"

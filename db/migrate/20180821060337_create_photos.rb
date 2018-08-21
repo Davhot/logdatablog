@@ -1,6 +1,6 @@
-class CreateArticlePhotos < ActiveRecord::Migration[5.0]
+class CreatePhotos < ActiveRecord::Migration[5.0]
   def change
-    create_table :article_photos do |t|
+    create_table :photos do |t|
       t.string :original_filename, null: false
       t.string :system_filename, null: false
       t.string :filepath, null: false
