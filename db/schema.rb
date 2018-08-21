@@ -10,10 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180811123508) do
+ActiveRecord::Schema.define(version: 20180821060337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "article_categories", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_article_categories_on_name", unique: true, using: :btree
+  end
+
+  create_table "article_photos", force: :cascade do |t|
+    t.string   "original_filename", null: false
+    t.string   "system_filename",   null: false
+    t.string   "filepath",          null: false
+    t.integer  "article_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["article_id"], name: "index_article_photos_on_article_id", using: :btree
+  end
+
+  create_table "article_tags", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_article_tags_on_name", unique: true, using: :btree
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.integer  "article_category_id"
+    t.string   "title",               null: false
+    t.string   "content",             null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["article_category_id"], name: "index_articles_on_article_category_id", using: :btree
+    t.index ["title"], name: "index_articles_on_title", unique: true, using: :btree
+  end
+
+  create_table "articles_tags", id: false, force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.integer "tag_id",     null: false
+    t.index ["article_id", "tag_id"], name: "index_articles_tags_on_article_id_and_tag_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -32,4 +72,6 @@ ActiveRecord::Schema.define(version: 20180811123508) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "article_photos", "articles"
+  add_foreign_key "articles", "article_categories"
 end

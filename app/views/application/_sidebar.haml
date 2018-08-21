@@ -1,7 +1,9 @@
 %aside.hidden-print#sidebar-wrapper
   .sidebar-nav
-    = link_to 'Выход',
-      destroy_user_session_path, {class: 'log-out-icon'}
+    - if user_signed_in?
+      = link_to 'Выход',
+        destroy_user_session_path, {class: 'log-out-icon'}
+      = link_to 'Теги', tags_path
     #author-info
       = image_tag 'a2', id: 'avatar'
       %strong David
@@ -21,8 +23,7 @@
     .menu-container.menu-primary#menu-primary{ role: 'navigation' }
       %nav.menu
         %ul.menu-primary-items#menu-primary-items
-          %li
-            %a.link{ href: '' } Home
+          %li= link_to 'Home', root_path
           %li
             %a.link{ href: '' } About
           %li
