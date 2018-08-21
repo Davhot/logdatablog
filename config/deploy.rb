@@ -26,14 +26,14 @@ namespace :docker do
     task :migrate do
       on roles(:db) do
         within release_path do
-          info "bundle exec rails db:migrate"
+          execute :"docker-compose", compose_run_command(:app, "bundle exec rake db:migrate")
         end
       end
     end
     task :seed do
       on roles(:db) do
         within release_path do
-          info "bundle exec rails db:seed"
+          execute :"docker-compose", compose_run_command(:app, "bundle exec rake db:seed")
         end
       end
     end
