@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
   resource :articles
   resources :tags
+  resources :categories
 end

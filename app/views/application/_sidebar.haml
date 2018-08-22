@@ -5,7 +5,9 @@
         .child-admin-panel
           %h5 Панель админа
         .child-admin-panel
-          = link_to 'Теги', tags_path, class: 'link'
+          = link_to t('categories.index').capitalize, categories_path,
+            class: 'link'
+          = link_to t('tags.index').capitalize, tags_path, class: 'link'
           = link_to 'Выход',
             destroy_user_session_path, {class: 'log-out-icon link'}
     #author-info
@@ -64,18 +66,10 @@
     %div
       %h6 Категории
       %ul.links-sidebar
-        %li
-          %a.link{ href: '' }
-            %p Программирование (10)
-        %li
-          %a.link{ href: '' }
-            %p Системное администрирование (3)
-        %li
-          %a.link{ href: '' }
-            %p Литература (1)
-        %li
-          %a.link{ href: '' }
-            %p Тестирование (2)
+        - for category in Category.all do
+          %li
+            %a.link{ href: '' }
+              %p= category.name
     %hr.sidebar-content-separate/
     %div#tags
       %h6 Теги

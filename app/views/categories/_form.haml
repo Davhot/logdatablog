@@ -1,0 +1,7 @@
+= form_for @item do |f|
+  .form-group.col-3
+    = f.label :name, class: 'col-form-label'
+    = f.text_field :name, autofocus: true, class: 'form-control'
+
+  .actions.col-3
+    = f.submit t("categories.#{params[:action]}"), class: 'btn btn-outline-secondary'
