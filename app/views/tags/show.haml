@@ -1,0 +1,7 @@
+%h1= t('tags.show').capitalize
+
+%span.badge.badge-pill.badge-secondary
+  = @item.name
+  = link_to content_tag(:i, nil, class: 'fa fa-pencil'), edit_tag_path(@item)
+  = link_to content_tag(:i, nil, class: 'fa fa-trash'), tag_path(@item),
+    method: :delete, data: {confirm: 'Вы уверены?'}

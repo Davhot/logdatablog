@@ -6,6 +6,7 @@ ru:
           attributes:
             name:
               blank: Не может быть пустым
+              taken: Такой тег уже существует
     attributes:
       tag:
         name: Название
@@ -13,4 +14,6 @@ ru:
     index: теги
     show: тег
     new: создать тег
+    create: создать тег
     edit: редактировать тег
+    update: редактировать тег

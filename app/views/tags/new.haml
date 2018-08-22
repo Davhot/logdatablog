@@ -1,7 +1,2 @@
-= form_for @item do |f|
-  .form-group.col-3
-    = f.label :name, class: 'col-form-label'
-    = f.text_field :name, autofocus: true, class: 'form-control'
-
-  .actions.col-3
-    = f.submit t('tags.new'), class: 'btn btn-primary'
+%h1= t('tags.new').capitalize
+= render 'form'

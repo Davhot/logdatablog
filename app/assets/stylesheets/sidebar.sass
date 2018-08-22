@@ -24,6 +24,23 @@
   color: #CCCCCC
 
 // sidebar
+
+.admin-panel
+  width: 100%
+  border-radius: 1em
+  margin-top: 1em
+  text-align: center
+  border: 1px solid black
+  border-radius: 1em
+  padding: 1em
+  a
+    color: $sidebar-color
+  a:hover
+    color: $sidebar-color
+.child-admin-panel
+  display: flex
+  justify-content: space-around
+
 #main-container
   min-height: $min-height-main-content !important
   padding-top: $offset-main-content
@@ -137,6 +154,9 @@
 .links-sidebar
   list-style: none
   padding-left: 0
+
+#tags a:hover
+  text-decoration: none
 
 #logo
   width: calc(#{$sidebar-width} - 50px)

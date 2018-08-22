@@ -1,9 +1,13 @@
 %aside.hidden-print#sidebar-wrapper
   .sidebar-nav
     - if user_signed_in?
-      = link_to 'Выход',
-        destroy_user_session_path, {class: 'log-out-icon'}
-      = link_to 'Теги', tags_path
+      .admin-panel
+        .child-admin-panel
+          %h5 Панель админа
+        .child-admin-panel
+          = link_to 'Теги', tags_path, class: 'link'
+          = link_to 'Выход',
+            destroy_user_session_path, {class: 'log-out-icon link'}
     #author-info
       = image_tag 'a2', id: 'avatar'
       %strong David
@@ -23,7 +27,7 @@
     .menu-container.menu-primary#menu-primary{ role: 'navigation' }
       %nav.menu
         %ul.menu-primary-items#menu-primary-items
-          %li= link_to 'Home', root_path
+          %li= link_to 'Home', root_path, class: 'link'
           %li
             %a.link{ href: '' } About
           %li
@@ -73,22 +77,11 @@
           %a.link{ href: '' }
             %p Тестирование (2)
     %hr.sidebar-content-separate/
-    %div
+    %div#tags
       %h6 Теги
-      %a{ href: '' }
-        %span.badge.badge-pill.badge-secondary Ruby
-      %a{ href: '' }
-        %span.badge.badge-pill.badge-secondary
-          Ruby on Rails
-          %span
-      %a{ href: '' }
-        %span.badge.badge-pill.badge-secondary C
-      %a{ href: '' }
-        %span.badge.badge-pill.badge-secondary Nginx
-      %a{ href: '' }
-        %span.badge.badge-pill.badge-secondary Markdown
-      %a{ href: '' }
-        %span.badge.badge-pill.badge-secondary Haskell
+      - for tag in Tag.all do
+        %a{ href: '' }
+          %span.badge.badge-pill.badge-secondary= tag.name
     %hr.sidebar-content-separate
     = image_tag 'log-data-logo-white.png', id: 'logo',
       title: 'log-data-logo-white'
