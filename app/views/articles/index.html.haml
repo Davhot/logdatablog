@@ -1,3 +1,20 @@
+- for article in @items do
+  .card.text-center
+    = image_tag 'log-data-logo-black.png', class: 'card-img-top'
+    .card-body
+      %h1.card-title= article.title
+      %p.card-text= distance_of_time_in_words(article.created_at, Time.now, locale: :en) + ' ago'
+    .card-body
+      %p.card-text= article.content
+      %a.card-link{ href: '#' } Читать далее...
+    .card-footer.text-muted.text-left
+      %p
+        Категория:
+        = article.category.name
+      %p
+        - for tag in article.tags do
+          %span.badge.badge-pill.badge-secondary= tag.name
+
 .card.text-center
   = image_tag 'log-data-logo-black.png', class: 'card-img-top'
   .card-body

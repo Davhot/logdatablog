@@ -22,6 +22,7 @@ gem 'font-awesome-rails', '4.7.0.4'
 gem 'haml', '5.0.4'
 gem 'devise', '~> 4.4.3'
 gem 'haml_lint', require: false
+gem 'simple_form', '4.0.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri

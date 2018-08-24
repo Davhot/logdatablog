@@ -1,0 +1,46 @@
+ru:
+  activerecord:
+    # errors:
+    #   models:
+    #     tag: &tag
+    #       attributes:
+    #         name:
+    #           blank: Не может быть пустым
+    #           taken: Должно быть уникально
+    #     category:
+    #       <<: *tag
+    #     article:
+    #       <<: *tag
+    attributes:
+      tag:
+        name: Название
+      category:
+        name: Название
+      article:
+        title: Заголовок
+        content: Содержание
+        tags: Теги
+        category_id: Категория
+        describe: Описание
+  tags:
+    index: теги
+    show: тег
+    new: создать тег
+    create: создать тег
+    edit: редактировать тег
+    update: редактировать тег
+  categories:
+    index: категории
+    show: категория
+    new: создать категорию
+    create: создать категорию
+    edit: редактировать категорию
+    update: редактировать категорию
+  articles:
+    index: статьи
+    show: статья
+    new: создать статью
+    create: создать статью
+    edit: редактировать статью
+    update: редактировать статью
+---

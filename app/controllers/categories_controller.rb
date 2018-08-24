@@ -45,10 +45,6 @@ class CategoriesController < ApplicationController
     @item = Category.find(params[:id])
   end
 
-  def set_breadcrumbs
-    @need_restful_breadcrumbs = true
-  end
-
   def category_params
     params.require(:category).permit(:name)
   end

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   as :user do
     get 'admin', to: 'devise/sessions#new', as: :sign_in
   end
-  resource :articles
+  resources :articles
   resources :tags
   resources :categories
 end

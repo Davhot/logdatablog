@@ -10,6 +10,10 @@
           = link_to t('tags.index').capitalize, tags_path, class: 'link'
           = link_to 'Выход',
             destroy_user_session_path, {class: 'log-out-icon link'}
+        .child-admin-panel
+          = link_to t('articles.new').capitalize, new_article_path,
+            class: 'link'
+
     #author-info
       = image_tag 'a2', id: 'avatar'
       %strong David

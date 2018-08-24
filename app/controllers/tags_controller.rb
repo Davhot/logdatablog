@@ -45,10 +45,6 @@ class TagsController < ApplicationController
     @item = Tag.find(params[:id])
   end
 
-  def set_breadcrumbs
-    @need_restful_breadcrumbs = true
-  end
-
   def tag_params
     params.require(:tag).permit(:name)
   end
