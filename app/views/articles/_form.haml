@@ -18,7 +18,8 @@
       as: :select,
       collection: Tag.all.order(:created_at).map{|c| [c.name, c.id]},
       input_html: { class: 'form-control multiselect', multiple: 'multiple' },
-      include_blank: false
+      include_blank: false,
+      selected: @item.tag_ids
   .form-group.col-12
     = f.input :content,
       as: :text,

@@ -1,0 +1,21 @@
+.card.text-center
+  - if user_signed_in?
+    .card-footer.text-muted.text-left
+      = link_to "Редактировать", edit_article_path(@item)
+      = link_to "Удалить", article_path(@item),
+        method: :delete, data: {confirm: 'Вы уверены?'}
+  = image_tag 'log-data-logo-black.png', class: 'card-img-top'
+  .card-body
+    %h1.card-title= @item.title
+    %p.card-text= distance_of_time_in_words(@item.created_at, Time.now, locale: :en) + ' ago'
+  .card-body
+    %p.card-text= @item.describe
+  .card-body
+    %p.card-text= @item.content
+  .card-footer.text-muted.text-left
+    %p
+      Категория:
+      = @item.category.name
+    %p
+      - for tag in @item.tags do
+        %span.badge.badge-pill.badge-secondary= tag.name

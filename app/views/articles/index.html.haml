@@ -1,12 +1,17 @@
 - for article in @items do
   .card.text-center
+    - if user_signed_in?
+      .card-footer.text-muted.text-left
+        = link_to "Редактировать", edit_article_path(article)
+        = link_to "Удалить", article_path(article),
+          method: :delete, data: {confirm: 'Вы уверены?'}
     = image_tag 'log-data-logo-black.png', class: 'card-img-top'
     .card-body
       %h1.card-title= article.title
       %p.card-text= distance_of_time_in_words(article.created_at, Time.now, locale: :en) + ' ago'
     .card-body
-      %p.card-text= article.content
-      %a.card-link{ href: '#' } Читать далее...
+      %p.card-text= article.describe
+      = link_to 'Читать', article_path(article), class: 'card-link'
     .card-footer.text-muted.text-left
       %p
         Категория:
@@ -15,40 +20,6 @@
         - for tag in article.tags do
           %span.badge.badge-pill.badge-secondary= tag.name
 
-.card.text-center
-  = image_tag 'log-data-logo-black.png', class: 'card-img-top'
-  .card-body
-    %h1.card-title GoAccess парсер логов Nginx
-    %p.card-text Опубликовано 5 минут назад.
-  .card-body
-    %p.card-text
-      Why GoAccess?
-      GoAccess was designed to be a fast, terminal-based log analyzer.
-      Its core idea is to quickly analyze and view web server statistics
-      in real time without needing to use your browser (great if you want
-      to do a quick analysis of your access log via SSH,
-      or if you simply love working in the terminal)...
-    %a.card-link{ href: '#' } Читать далее...
-  .card-footer.text-muted.text-right
-    %i.fa.fa-eye
-    15
-.card.text-center
-  = image_tag 'log-data-logo-black.png', class: 'card-img-top'
-  .card-body
-    %h1.card-title GoAccess парсер логов Nginx
-    %p.card-text Опубликовано 5 минут назад.
-  .card-body
-    %p.card-text
-      Why GoAccess?
-      GoAccess was designed to be a fast, terminal-based log analyzer.
-      Its core idea is to quickly analyze and view web server statistics
-      in real time without needing to use your browser (great if you want
-      to do a quick analysis of your access log via SSH,
-      or if you simply love working in the terminal)...
-    %a.card-link{ href: '#' } Читать далее...
-  .card-footer.text-muted.text-right
-    %i.fa.fa-eye
-    15
 .card.text-center
   = image_tag 'log-data-logo-black.png', class: 'card-img-top'
   .card-body
