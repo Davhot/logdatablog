@@ -23,6 +23,8 @@
   .form-group.col-12
     = f.input :content,
       as: :text,
-      class: 'form-control'
+      input_html: { class: 'form-control summernote' }
   .actions.col-12
-    = f.submit t("articles.#{params[:action]}"), class: 'btn btn-outline-secondary'
+    = f.submit t("articles.#{params[:action]}"),
+      class: 'btn btn-outline-secondary',
+      id: 'article-create-btn'
