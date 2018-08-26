@@ -24,6 +24,8 @@ gem 'devise', '~> 4.4.3'
 gem 'haml_lint', require: false
 gem 'simple_form', '4.0.1'
 
+gem 'coderay'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end

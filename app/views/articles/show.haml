@@ -10,7 +10,7 @@
     %p.card-text= distance_of_time_in_words(@item.created_at, Time.now, locale: :en) + ' ago'
   .card-body
     %p.card-text= @item.describe
-  .card-body
+  .card-body.article-body
     %p.card-text= @item.content.html_safe
   .card-footer.text-muted.text-left
     %p
