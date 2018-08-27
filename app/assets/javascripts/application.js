@@ -3,10 +3,13 @@
 //= require jquery_ujs
 //= require popper
 //= require bootstrap
+
 //= require summernote-bs4
 //= require summernote-ru-RU
 //= require summernote-ext-highlight
 //= require highlighter-rainbow-main
+//= require summernote-cleaner
+
 //= require main
 
 $(document).ready(function () {
@@ -18,11 +21,11 @@ $(document).ready(function () {
 
 $(document).ready(function() {
   $('.summernote').summernote({
-
     tabsize: 2,
     height: 500,
     prettifyHtml: false,
     toolbar: [
+      ['cleaner',['cleaner']],
       ['misc', ['undo', 'redo']],
       ['style', ['bold', 'italic', 'underline', 'clear']],
       ['font', ['strikethrough', 'superscript', 'subscript', 'fontname']],
@@ -34,6 +37,20 @@ $(document).ready(function() {
       ['highlight', ['highlight']],
       ['misc', ['fullscreen', 'codeview', 'help']]
     ],
+    cleaner: {
+      action: 'both',
+      newline: '<p><br></p>', // Summernote's default is to use '<p><br></p>'
+      notStyle: 'position:absolute;top:0;left:0;right:0', // Position of Notification
+      icon: '<i class="note-icon-eraser"></i>',
+      keepHtml: true, // Remove all Html formats
+      keepOnlyTags: ['<p>', '<br>', '<ul>', '<li>', '<b>', '<strong>','<i>', '<a>'],
+      keepClasses: false, // Remove Classes
+      badTags: ['style', 'script', 'applet', 'embed', 'noframes', 'noscript', 'html', '<div>', '<pre>', '<code>'],
+      badAttributes: ['style', 'start', 'class'], // Remove attributes from remaining tags
+      limitChars: false, // 0/false|# 0/false disables option
+      limitDisplay: 'both', // text|html|both
+      limitStop: false // true/false
+    },
     popover: {
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Monserrat'],
       image: [
