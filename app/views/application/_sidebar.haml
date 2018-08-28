@@ -8,8 +8,8 @@
           = link_to t('categories.index').capitalize, categories_path,
             class: 'link'
           = link_to t('tags.index').capitalize, tags_path, class: 'link'
-          = link_to 'Выход',
-            destroy_user_session_path, {class: 'log-out-icon link'}
+          = link_to 'Выход', destroy_user_session_path,
+            class: 'log-out-icon link'
         .child-admin-panel
           = link_to t('articles.new').capitalize, new_article_path,
             class: 'link'
@@ -70,14 +70,14 @@
     %div
       %h6 Категории
       %ul.links-sidebar
-        - for category in Category.all do
+        - Category.all.each do |category|
           %li
             %a.link{ href: '' }
               %p= category.name
     %hr.sidebar-content-separate/
-    %div#tags
+    #tags
       %h6 Теги
-      - for tag in Tag.all do
+      - Tag.all.each do |tag|
         %a{ href: '' }
           %span.badge.badge-pill.badge-secondary= tag.name
     %hr.sidebar-content-separate

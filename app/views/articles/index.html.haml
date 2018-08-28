@@ -1,14 +1,15 @@
-- for article in @items do
+- @items.each do |article|
   .card.text-center
     - if user_signed_in?
       .card-footer.text-muted.text-left
-        = link_to "Редактировать", edit_article_path(article)
-        = link_to "Удалить", article_path(article),
-          method: :delete, data: {confirm: 'Вы уверены?'}
+        = link_to 'Редактировать', edit_article_path(article)
+        = link_to 'Удалить', article_path(article),
+          method: :delete, data: { confirm: 'Вы уверены?' }
     = image_tag 'log-data-logo-black.png', class: 'card-img-top'
     .card-body
       %h1.card-title= article.title
-      %p.card-text= distance_of_time_in_words(article.created_at, Time.now, locale: :en) + ' ago'
+      %p.card-text= distance_of_time_in_words(article.created_at,
+        Time.now, locale: :en) + ' ago'
     .card-body
       %p.card-text= article.describe
       = link_to 'Читать', article_path(article), class: 'card-link'
@@ -17,7 +18,7 @@
         Категория:
         = article.category.name
       %p
-        - for tag in article.tags do
+        - article.tags.each do |tag|
           %span.badge.badge-pill.badge-secondary= tag.name
 
 .card.text-center

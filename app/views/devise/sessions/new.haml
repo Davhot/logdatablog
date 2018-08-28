@@ -3,11 +3,12 @@
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .form-group.col-3
     = f.label :email, class: 'col-form-label'
-    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+    = f.email_field :email, autofocus: true, autocomplete: 'email',
+      class: 'form-control'
 
   .form-group.col-3
     = f.label :password, class: 'col-form-label'
-    = f.password_field :password, autocomplete: "off", class: 'form-control'
+    = f.password_field :password, autocomplete: 'off', class: 'form-control'
 
   - if devise_mapping.rememberable?
     .field.col-3
@@ -15,6 +16,6 @@
       = f.label :remember_me
 
   .actions.col-3
-    = f.submit "Войти", class: 'btn btn-primary'
+    = f.submit 'Войти', class: 'btn btn-primary'
 
-= render "devise/shared/links"
+= render 'devise/shared/links'

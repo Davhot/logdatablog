@@ -12,13 +12,16 @@
           - when 'index'
             %li.breadcrumb-item.active= t(controller + '.index')
           - when 'show'
-            %li.breadcrumb-item= link_to t(controller + '.index'), '/' + controller
+            %li.breadcrumb-item= link_to t(controller + '.index'),
+              '/' + controller
             %li.breadcrumb-item.active= t(controller + '.show')
           - when 'new', 'create'
-            %li.breadcrumb-item= link_to t(controller + '.index'), '/' + controller
+            %li.breadcrumb-item= link_to t(controller + '.index'),
+              '/' + controller
             %li.breadcrumb-item.active= t(controller + '.new')
           - when 'edit', 'update'
-            %li.breadcrumb-item= link_to t(controller + '.index'), '/' + controller
+            %li.breadcrumb-item= link_to t(controller + '.index'),
+              '/' + controller
             %li.breadcrumb-item= link_to t(controller + '.show'),
-              '/' + controller + '/' + @item.id.to_s
+              '/' + controller + '/' + item.id.to_s
             %li.breadcrumb-item.active= t(controller + '.edit')

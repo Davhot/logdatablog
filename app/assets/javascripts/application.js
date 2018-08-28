@@ -24,10 +24,11 @@ $(document).ready(function() {
     tabsize: 2,
     height: 500,
     prettifyHtml: false,
+    styleTags: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     toolbar: [
       ['cleaner',['cleaner']],
       ['misc', ['undo', 'redo']],
-      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['style', ['bold', 'italic', 'underline', 'clear', 'style']],
       ['font', ['strikethrough', 'superscript', 'subscript', 'fontname']],
       ['fontsize', ['fontsize']],
       ['color', ['color']],
