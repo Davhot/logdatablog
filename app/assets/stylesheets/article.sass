@@ -11,3 +11,67 @@
 .article-body
   pre, ul, ol
   text-align: left
+
+
+.progress
+  height: 0.5em
+  border-radius: 2px
+
+.fileinput-button
+  display: block
+  position: relative
+  overflow: hidden
+  font-size: 1em
+  height: auto
+  line-height: 2em
+  border: 1px solid #ccc
+  border-radius: 3px
+  box-shadow: 0 0 5px rgba(0,0,0,0.1)
+  transition: box-shadow 0.1s linear
+  margin-bottom: 1em
+  padding: 0
+
+.fileinput-button > .file-label
+  padding-left: 1em
+
+@media only screen and ( max-width: 500px )
+  .file_upload > .file-label
+    display: none
+  .file_upload > button
+    width: 100%
+
+.fileinput-button .button, .fileinput-button > mark
+  display: block
+  cursor: pointer
+
+.fileinput-button .button
+  float: right
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  width: 8em
+  height: 100%
+  text-align: center
+
+.fileinput-button > mark
+  background: transparent
+  padding-left: 1em
+
+.fileinput-button input[type=file]
+  position: absolute
+  top: 0
+  left: 0
+  opacity: 0
+  width: 100%
+
+.fileinput-button.focus
+  box-shadow: 0 0 5px rgba(0,30,255,0.4)
+
+.fileinput-button > button
+  float: right
+  width: 8em
+  height: 100%
+  transition: background 0.2s
+  border-radius: 2px
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis

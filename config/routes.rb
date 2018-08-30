@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   as :user do
     get 'admin', to: 'devise/sessions#new', as: :sign_in
   end
-  resources :articles
+  resources :articles do
+    collection do
+      post 'upload_file'
+      get 'download_file'
+      get 'delete_file'
+    end
+  end
   resources :tags
   resources :categories
 end

@@ -12,6 +12,8 @@ class ArticlesController < ApplicationController
 
   def new
     @item = Article.new
+
+    @id_form = Digest::MD5.hexdigest(DateTime.current.to_s)
   end
 
   def create
@@ -19,6 +21,7 @@ class ArticlesController < ApplicationController
     if @item.save
       redirect_to root_path, flash: {success: 'Статья успешно создана'}
     else
+      @id_form = params["id_form"]
       render :new
     end
   end
@@ -40,6 +43,28 @@ class ArticlesController < ApplicationController
     else
       redirect_to articles_path, flash: {error: 'Статья не удалена'}
     end
+  end
+
+  def upload_file
+    if params[:id].present?
+      @incident_document = Incident::Document.create_from_file(params["file"],
+        current_main_user, nil, params["id"])
+    else
+      @incident_document = Incident::Document.create_from_file(params["file"],
+        current_main_user, params["id_form"])
+    end
+  end
+
+  def download_file
+    doc = Incident::Document.find(params[:id])
+    send_file(doc.filepath, filename: doc.original_filename)
+  end
+
+  def delete_file
+    doc = Incident::Document.find(params[:id])
+    File.delete(doc.filepath)
+    @doc_id = doc.id
+    doc.update_attribute(:deleted, true)
   end
 
   private

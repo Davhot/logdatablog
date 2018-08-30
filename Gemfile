@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+# ruby '2.5.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -13,16 +13,20 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'jquery-rails', '4.3.3'
+
+gem 'jquery-rails', '~> 4.3.3'
+gem 'jquery-ui-rails', '~> 6.0.1'
+gem 'jquery-fileupload-rails', '0.4.7'
+
 gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap', '~> 4.1.3'
 
-gem 'font-awesome-rails', '4.7.0.4'
-gem 'haml', '5.0.4'
+gem 'font-awesome-rails', '~> 4.7.0.4'
+gem 'haml', '~> 5.0.4'
 gem 'devise', '~> 4.4.3'
 gem 'haml_lint', require: false
-gem 'simple_form', '4.0.1'
+gem 'simple_form', '~> 4.0.1'
 
 gem 'coderay'
 

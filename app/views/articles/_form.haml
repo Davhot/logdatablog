@@ -1,30 +1,47 @@
 = simple_form_for @item do |f|
-  .form-group.col-12
-    = f.input :title,
-      autofocus: true,
-      class: 'form-control'
-  .form-group.col-12
-    = f.input :describe,
-      autofocus: true,
-      class: 'form-control'
-  .form-group.col-12
-    = f.input :category_id,
-      as: :select,
-      collection: Category.all.order(:created_at).map { |c| [c.name, c.id] },
-      input_html: { class: 'form-control selectpicker' },
-      include_blank: false
-  .form-group.col-12
-    = f.input :tags,
-      as: :select,
-      collection: Tag.all.order(:created_at).map { |c| [c.name, c.id] },
-      input_html: { class: 'form-control multiselect', multiple: 'multiple' },
-      include_blank: false,
-      selected: f.object.tag_ids
-  .form-group.col-12
-    = f.input :content,
-      as: :text,
-      input_html: { class: 'form-control summernote' }
-  .actions.col-12
-    = f.submit t("articles.#{params[:action]}"),
-      class: 'btn btn-outline-secondary',
-      id: 'article-create-btn'
+
+  -# Only Ajax request for data-url
+  .row
+    .col-12
+      .btn.btn-default.fileinput-button#dropzone
+        %button.btn.btn-outline-secondary Выбрать
+        %div.file-label Файлы не выбраны
+        - if f.object.try(:id)
+          = file_field_tag 'file', id: 'article-choose-photo',
+            'data-url': upload_file_articles_path(id: f.object.id), multiple: true
+        - else
+          = hidden_field_tag :id_form, nil, value: id_form
+          = file_field_tag 'file', id: 'article-choose-photo',
+            'data-url': upload_file_articles_path(id_form: id_form), multiple: true
+        #progress.progress
+          .progress-bar
+
+    .form-group.col-12
+      = f.input :title,
+        autofocus: true,
+        class: 'form-control'
+    .form-group.col-12
+      = f.input :describe,
+        autofocus: true,
+        class: 'form-control'
+    .form-group.col-12
+      = f.input :category_id,
+        as: :select,
+        collection: Category.all.order(:created_at).map { |c| [c.name, c.id] },
+        input_html: { class: 'form-control selectpicker' },
+        include_blank: false
+    .form-group.col-12
+      = f.input :tags,
+        as: :select,
+        collection: Tag.all.order(:created_at).map { |c| [c.name, c.id] },
+        input_html: { class: 'form-control multiselect', multiple: 'multiple' },
+        include_blank: false,
+        selected: f.object.tag_ids
+    .form-group.col-12
+      = f.input :content,
+        as: :text,
+        input_html: { class: 'form-control summernote' }
+    .actions.col-12
+      = f.submit t("articles.#{params[:action]}"),
+        class: 'btn btn-outline-secondary',
+        id: 'article-create-btn'
