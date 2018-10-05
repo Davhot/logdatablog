@@ -45,11 +45,6 @@
           - @article_files.each do |article_file|
             = render 'article_file', article_file: article_file
 
-    -# Использование summernote!
-    -# .form-group.col-12
-    -#   = f.input :content,
-    -#     as: :text,
-    -#     input_html: { class: 'form-control summernote' }
     #test-editormd
       = f.text_area :content
 

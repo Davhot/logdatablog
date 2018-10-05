@@ -11,13 +11,6 @@
 //= require jquery-fileupload/jquery.fileupload-process
 //= require jquery-fileupload/jquery.fileupload-validate
 
-//= require summernote-bs4
-//= require summernote-ru-RU
-//= require summernote-ext-highlight
-//= require summernote-cleaner
-//= require summernote
-
-
 //= require lib/prettify.min
 //= require lib/marked.min
 //= require lib/flowchart.min
@@ -25,9 +18,6 @@
 //= require lib/raphael.min
 //= require lib/underscore.min
 //= require lib/sequence-diagram.min
-
-
-
 //= require editormd
 //= require editormd_en
 

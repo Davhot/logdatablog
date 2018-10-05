@@ -30,8 +30,6 @@ gem 'simple_form', '~> 4.0.1'
 
 gem 'coderay'
 
-gem 'redcarpet'
-
 group :development, :test do
   gem 'byebug', platform: :mri
 end
