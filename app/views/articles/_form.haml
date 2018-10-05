@@ -45,12 +45,18 @@
           - @article_files.each do |article_file|
             = render 'article_file', article_file: article_file
 
-    .form-group.col-12
-      = f.input :content,
-        as: :text,
-        input_html: { class: 'form-control summernote' }
+    -# Использование summernote!
+    -# .form-group.col-12
+    -#   = f.input :content,
+    -#     as: :text,
+    -#     input_html: { class: 'form-control summernote' }
+    #test-editormd
+      = f.text_area :content
 
     .actions.col-12
       = f.submit t("articles.#{params[:action]}"),
         class: 'btn btn-outline-secondary',
         id: 'article-create-btn'
+
+-# #test-editormd
+-#   %textarea

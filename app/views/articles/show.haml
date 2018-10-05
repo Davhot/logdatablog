@@ -12,8 +12,10 @@
         Time.now, locale: :en) + ' ago'
   .card-body
     %p.card-text= @item.describe
-  .card-body.article-body
-    %p.card-text= @item.content.html_safe
+  -# .card-body.article-body
+  #editormd-view
+    %textarea
+      = @item.content
   .card-footer.text-muted.text-left
     %p
       Категория:

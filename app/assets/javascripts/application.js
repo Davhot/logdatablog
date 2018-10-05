@@ -14,9 +14,23 @@
 //= require summernote-bs4
 //= require summernote-ru-RU
 //= require summernote-ext-highlight
-//= require highlighter-rainbow-main
 //= require summernote-cleaner
 //= require summernote
+
+
+//= require lib/prettify.min
+//= require lib/marked.min
+//= require lib/flowchart.min
+//= require lib/jquery.flowchart.min
+//= require lib/raphael.min
+//= require lib/underscore.min
+//= require lib/sequence-diagram.min
+
+
+
+//= require editormd
+//= require editormd_en
+
 
 //= require main
 //= require download_files
@@ -27,5 +41,40 @@ $(document).ready(function () {
     selectionHeader: "<div class='custom-header'>Выбранные элементы</div>"
   });
 
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
+
+
+  if ($("#test-editormd").length > 0){
+    var testEditor;
+    $(function() {
+        testEditor = editormd("test-editormd", {
+            width           : "100%",
+            height          : "1000",
+            path            : "/assets/lib/",
+            htmlDecode      : "style,script,iframe",
+            tex             : true,
+            emoji           : true,
+            taskList        : true,
+            flowChart       : true,
+            sequenceDiagram : true,
+            imageUpload     : false,
+            imageFormats    : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL  : "./php/upload.php", // TODO: загрузка изображения на URL
+        });
+    });
+  }
+
+
+  var editormd_view;
+  $(function() {
+      editormd_view = editormd.markdownToHTML("editormd-view", {
+        path            : "/assets/lib/",
+        htmlDecode      : "style,script,iframe",  // you can filter tags decode
+        emoji           : true,
+        taskList        : true,
+        tex             : true,  // 默认不解析
+        flowChart       : true,  // 默认不解析
+        sequenceDiagram : true,  // 默认不解析
+      });
+  })
 })
