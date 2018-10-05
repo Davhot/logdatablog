@@ -1,0 +1,5 @@
+%tr{ id: "article-file-#{article_file.id}" }
+  %td= l article_file.created_at, format: :long
+  %td= article_file.original_filename
+  %td= download_article_file_link(article_file.id)
+  %td= delete_file_article_link(article_file.id)

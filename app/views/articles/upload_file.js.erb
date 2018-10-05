@@ -1,0 +1,3 @@
+$("#article-files").prepend("<%= j render 'article_file', article_file: @article_file %>")
+$('[data-toggle="tooltip"]').tooltip()
+$("#n-article-files").html(+$("#n-article-files").text() + 1)

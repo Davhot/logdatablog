@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_breadcrumbs, except: [:index]
   before_action :set_article, only: %i(show edit update destroy)
+  before_action :set_article_files, only: %i(edit update)
 
   def index
     @items = Article.all.order(created_at: :desc)
@@ -47,27 +48,33 @@ class ArticlesController < ApplicationController
 
   def upload_file
     if params[:id].present?
-      @incident_document = Incident::Document.create_from_file(params["file"],
-        current_main_user, nil, params["id"])
+      @article_file = Article::File.create_from_file(params["file"], nil,
+        params["id"], current_user)
     else
-      @incident_document = Incident::Document.create_from_file(params["file"],
-        current_main_user, params["id_form"])
+      @article_file = Article::File.create_from_file(params["file"],
+        params["id_form"], nil, current_user)
     end
   end
 
   def download_file
-    doc = Incident::Document.find(params[:id])
+    doc = Article::File.find(params[:id])
     send_file(doc.filepath, filename: doc.original_filename)
   end
 
   def delete_file
-    doc = Incident::Document.find(params[:id])
-    File.delete(doc.filepath)
-    @doc_id = doc.id
-    doc.update_attribute(:deleted, true)
+    doc = Article::File.find(params[:id])
+    if current_user.present? && doc.user == current_user
+      File.delete(doc.filepath) if File.exists?(doc.filepath)
+      @doc_id = doc.id
+      doc.destroy
+    end
   end
 
   private
+
+  def set_article_files
+    @article_files = @item.files
+  end
 
   def set_article
     @item = Article.find(params[:id])

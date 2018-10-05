@@ -16,13 +16,16 @@ ActiveRecord::Schema.define(version: 20180828151053) do
   enable_extension "plpgsql"
 
   create_table "article_files", force: :cascade do |t|
-    t.string   "original_filename"
-    t.string   "system_name"
-    t.string   "filepath"
+    t.string   "original_filename",            null: false
+    t.string   "system_name",                  null: false
+    t.string   "filepath",                     null: false
+    t.string   "unique_index_for_new_article"
     t.integer  "article_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "user_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["article_id"], name: "index_article_files_on_article_id", using: :btree
+    t.index ["user_id"], name: "index_article_files_on_user_id", using: :btree
   end
 
   create_table "articles", force: :cascade do |t|
@@ -84,6 +87,7 @@ ActiveRecord::Schema.define(version: 20180828151053) do
   end
 
   add_foreign_key "article_files", "articles"
+  add_foreign_key "article_files", "users"
   add_foreign_key "articles", "categories"
   add_foreign_key "photos", "articles"
 end
