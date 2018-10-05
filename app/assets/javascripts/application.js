@@ -47,9 +47,9 @@ $(document).ready(function () {
             taskList        : true,
             flowChart       : true,
             sequenceDiagram : true,
-            imageUpload     : false,
+            imageUpload     : true,
             imageFormats    : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL  : "./php/upload.php", // TODO: загрузка изображения на URL
+            imageUploadURL  : $("#test-editormd").data('url'), // TODO: загрузка изображения на URL
         });
     });
   }

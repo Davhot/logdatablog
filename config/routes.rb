@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       patch 'upload_file'
       get 'download_file'
       get 'delete_file'
+      post 'upload_image'
     end
     collection do
       patch 'upload_file'

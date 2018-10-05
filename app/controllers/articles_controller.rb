@@ -56,6 +56,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def upload_image
+    raise params.inspect
+  end
+
   def download_file
     doc = Article::File.find(params[:id])
     send_file(doc.filepath, filename: doc.original_filename)
