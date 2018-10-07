@@ -45,7 +45,8 @@
           - @article_files.each do |article_file|
             = render 'article_file', article_file: article_file
 
-    #test-editormd{ 'data-url': upload_image_article_path }
+    #test-editormd{ 'data-url': upload_image_article_path,
+      'data-images-url': load_editor_image_article_path }
       = f.text_area :content
 
     .actions.col-12

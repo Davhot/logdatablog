@@ -13,4 +13,14 @@ module ArticlesHelper
         "data-placement": "bottom", "data-html": "true",
         "data-toggle": "tooltip", "data-original-title": "Удалить файл" }
   end
+
+  def set_article_image_link(article_image)
+    link_to content_tag(:i, nil, class: "fa fa-check"),
+       '', { 'data-toggle': 'tooltip', 'data-html': true,
+         'data-placement': 'bottom', 'title': 'Выбрать файл',
+          class: 'set-article-image',
+          id: "set-article-image-#{article_image.id}",
+          data: {address: root_url + article_image.server_path,
+            title: article_image.original_filename } }
+  end
 end

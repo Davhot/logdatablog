@@ -24,6 +24,7 @@
 
 //= require main
 //= require download_files
+//= require article
 
 $(document).ready(function () {
   $(".multiselect").multiSelect({

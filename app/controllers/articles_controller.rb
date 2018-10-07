@@ -3,6 +3,10 @@ class ArticlesController < ApplicationController
   before_action :set_breadcrumbs, except: [:index]
   before_action :set_article, only: %i(show edit update destroy)
   before_action :set_article_files, only: %i(edit update)
+  before_action :set_article_images, only: %i(load_editor_image edit update new
+    create)
+  # TODO: генерить форму загрузки images с authenticity_token
+  skip_before_action :verify_authenticity_token, only: :upload_image
 
   def index
     @items = Article.all.order(created_at: :desc)
@@ -49,15 +53,28 @@ class ArticlesController < ApplicationController
   def upload_file
     if params[:id].present?
       @article_file = Article::File.create_from_file(params["file"], nil,
-        params["id"], current_user)
+        params["id"], current_user, false)
     else
       @article_file = Article::File.create_from_file(params["file"],
-        params["id_form"], nil, current_user)
+        params["id_form"], nil, current_user, false)
     end
   end
 
   def upload_image
-    raise params.inspect
+    if params[:id].present?
+      @article_image = Article::File.create_from_file(params["editormd-image-file"], nil,
+        params["id"], current_user, true)
+    else
+      @article_image = Article::File.create_from_file(params["editormd-image-file"],
+        params["id_form"], nil, current_user, true)
+    end
+    render json: {address: root_url + @article_image.server_path,
+      title: @article_image.original_filename, status: 200,
+      load_editor_image_path: load_editor_image_article_path,
+      message: 'Изображение загружено!'}
+  end
+
+  def load_editor_image
   end
 
   def download_file
@@ -67,6 +84,12 @@ class ArticlesController < ApplicationController
 
   def delete_file
     doc = Article::File.find(params[:id])
+    @item = doc.article
+    if @item.present?
+      @article_images = @item.files.where(for_content: true)
+    else
+      @article_images = Article::File.where(for_content: true, article_id: nil)
+    end
     if current_user.present? && doc.user == current_user
       File.delete(doc.filepath) if File.exists?(doc.filepath)
       @doc_id = doc.id
@@ -76,8 +99,17 @@ class ArticlesController < ApplicationController
 
   private
 
+  def set_article_images
+    if params[:id].present?
+      set_article
+      @article_images = @item.files.where(for_content: true)
+    else
+      @article_images = Article::File.where(for_content: true, article_id: nil)
+    end
+  end
+
   def set_article_files
-    @article_files = @item.files
+    @article_files = @item.files.where(for_content: false)
   end
 
   def set_article

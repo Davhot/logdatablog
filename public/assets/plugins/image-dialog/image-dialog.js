@@ -49,7 +49,7 @@
                 var dialogContent = ( (settings.imageUpload) ? "<form action=\"" + action +"\" target=\"" + iframeName + "\" method=\"post\" enctype=\"multipart/form-data\" class=\"" + classPrefix + "form\">" : "<div class=\"" + classPrefix + "form\">" ) +
                                         ( (settings.imageUpload) ? "<iframe name=\"" + iframeName + "\" id=\"" + iframeName + "\" guid=\"" + guid + "\"></iframe>" : "" ) +
                                         "<label>" + imageLang.url + "</label>" +
-                                        "<input type=\"text\" data-url />" + (function(){
+                                        "<input type=\"text\" data-url id='editormd-image-dialog-address-input'/>" + (function(){
                                             return (settings.imageUpload) ? "<div class=\"" + classPrefix + "file-input\">" +
                                                                                 "<input type=\"file\" name=\"" + classPrefix + "image-file\" accept=\"image/*\" />" +
                                                                                 "<input type=\"submit\" value=\"" + imageLang.uploadButton + "\" />" +
@@ -57,13 +57,13 @@
                                         })() +
                                         "<br/>" +
                                         "<label>" + imageLang.alt + "</label>" +
-                                        "<input type=\"text\" value=\"" + selection + "\" data-alt />" +
+                                        "<input type=\"text\" value=\"" + selection + "\" data-alt id='editormd-image-dialog-title-input'/>" +
                                         "<br/>" +
                                         "<label>" + imageLang.link + "</label>" +
-                                        "<input type=\"text\" value=\"http://\" data-link />" +
+                                        "<input type=\"text\" value=\"http://\" data-link id='editormd-image-dialog-link-input'/>" +
                                         "<br/>" +
                                     ( (settings.imageUpload) ? "</form>" : "</div>");
-
+                dialogContent = "<div id='images_container'></div>" + dialogContent
                 //var imageFooterHTML = "<button class=\"" + classPrefix + "btn " + classPrefix + "image-manager-btn\" style=\"float:left;\">" + imageLang.managerButton + "</button>";
 
                 dialog = this.createDialog({
@@ -118,6 +118,7 @@
                         }]
                     }
                 });
+                $.ajax({ url: $("#test-editormd").data('images-url') })
 
                 dialog.attr("id", classPrefix + "image-dialog-" + guid);
 
@@ -159,6 +160,9 @@
                             var json = (body.innerText) ? body.innerText : ( (body.textContent) ? body.textContent : null);
 
                             json = (typeof JSON.parse !== "undefined") ? JSON.parse(json) : eval("(" + json + ")");
+                            $('#editormd-image-dialog-address-input').val(json.address);
+                            $('#editormd-image-dialog-title-input').val(json.title);
+                            $.ajax({url: json.load_editor_image_path})
 
                             if(!settings.crossDomainUpload)
                             {

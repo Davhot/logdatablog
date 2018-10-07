@@ -4,7 +4,7 @@ class Article::File < ApplicationRecord
 
   validates :original_filename, :system_name, :filepath, presence: true
 
-  def self.create_from_file(uploaded_io, id_form, article_id = nil, user)
+  def self.create_from_file(uploaded_io, id_form, article_id = nil, user, for_content)
     filename = uploaded_io.original_filename
     digest = Digest::MD5.hexdigest(filename + DateTime.current.to_s)
     filepath = Rails.root.join('public', 'uploads')
@@ -19,7 +19,8 @@ class Article::File < ApplicationRecord
         system_name: digest,
         unique_index_for_new_article: id_form,
         article_id: article_id,
-        user: user)
+        user: user,
+        for_content: for_content)
     end
     @doc
   end
@@ -29,5 +30,9 @@ class Article::File < ApplicationRecord
       "original_filename: #{original_filename}",
       "system_name: #{system_name}",
       "article_id: #{article_id}"].join(', ')
+  end
+
+  def server_path
+    filepath.sub(/^\/.*public\//, '')
   end
 end

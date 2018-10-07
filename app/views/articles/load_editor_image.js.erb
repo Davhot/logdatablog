@@ -1,9 +1,3 @@
-<%- if @doc_id.present? %>
-  $("#article-file-<%= @doc_id %> [data-toggle=\"tooltip\"]").tooltip('dispose')
-  $("#article-file-<%= @doc_id %>").remove()
-  $("#n-article-files").html(+$("#n-article-files").text() - 1)
-<%- end %>
-
 $('#images_container').html("<%= j render 'load_editor_image' %>")
 
 $(".set-article-image").click(function (e) {

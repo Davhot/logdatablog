@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180828151053) do
+ActiveRecord::Schema.define(version: 20181007162724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "article_files", force: :cascade do |t|
-    t.string   "original_filename",            null: false
-    t.string   "system_name",                  null: false
-    t.string   "filepath",                     null: false
+    t.string   "original_filename",                            null: false
+    t.string   "system_name",                                  null: false
+    t.string   "filepath",                                     null: false
     t.string   "unique_index_for_new_article"
     t.integer  "article_id"
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.boolean  "for_content",                  default: false
     t.index ["article_id"], name: "index_article_files_on_article_id", using: :btree
     t.index ["user_id"], name: "index_article_files_on_user_id", using: :btree
   end

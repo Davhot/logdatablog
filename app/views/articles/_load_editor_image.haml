@@ -1,0 +1,6 @@
+- @article_images.each do |image|
+  .image_article
+    = image_tag '/' + image.server_path, title: image.original_filename
+    .image-links
+      = set_article_image_link(image)
+      = delete_file_article_link(image.id)
