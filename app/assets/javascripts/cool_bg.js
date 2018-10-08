@@ -1,18 +1,19 @@
 // Если отключить анимацию, то загруженность цп минимальна
 $(document).ready(function () {
+  if($("#cool-bg").length > 0) {
+    $("#cool-bg").css({'width': window.innerWidth, 'height': window.innerHeight})
+  	var sizeMapX = $("#cool-bg").width()
+  	var sizeMapY = $("#cool-bg").height()
+  	var draw = SVG('cool-bg').size(sizeMapX, sizeMapY)
+  	draw.rect(sizeMapX, sizeMapY).fill('#eee')
 
-	$("#cool-bg").css({'width': window.innerWidth, 'height': window.innerHeight})
-	var sizeMapX = $("#cool-bg").width()
-	var sizeMapY = $("#cool-bg").height()
-	var draw = SVG('cool-bg').size(sizeMapX, sizeMapY)
-	draw.rect(sizeMapX, sizeMapY).fill('#eee')
+  	map = new Map(sizeMapX, sizeMapY, draw, datum)
+  	map.run()
 
-	map = new Map(sizeMapX, sizeMapY, draw, datum)
-	map.run()
-
-	$(window).resize(function () {
-		location.reload();
-	})
+  	$(window).resize(function () {
+  		location.reload();
+  	})
+  }
 });
 
 
