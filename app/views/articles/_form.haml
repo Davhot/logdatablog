@@ -31,9 +31,9 @@
           = file_field_tag 'file', id: 'article-choose-photo',
             'data-url': upload_file_article_path(id: f.object.id), multiple: true
         - else
-          = hidden_field_tag :id_form, nil, value: id_form
+          -# = hidden_field_tag :id_form, nil, value: id_form
           = file_field_tag 'file', id: 'article-choose-photo',
-            'data-url': articles_upload_file_path(id_form: id_form), multiple: true
+            'data-url': upload_file_articles_path, multiple: true
         #progress.progress
           .progress-bar
       %strong
@@ -45,8 +45,8 @@
           - @article_files.each do |article_file|
             = render 'article_file', article_file: article_file
 
-    #test-editormd{ 'data-url': upload_image_article_path,
-      'data-images-url': load_editor_image_article_path }
+    #test-editormd{ 'data-url': upload_image_articles_path(id: @item.try(:id)),
+      'data-images-url': load_editor_image_articles_path(id: @item.try(:id)) }
       = f.text_area :content
 
     .actions.col-12

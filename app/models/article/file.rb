@@ -1,10 +1,10 @@
 class Article::File < ApplicationRecord
-  belongs_to :article
+  belongs_to :article, required: false
   belongs_to :user
 
   validates :original_filename, :system_name, :filepath, presence: true
 
-  def self.create_from_file(uploaded_io, id_form, article_id = nil, user, for_content)
+  def self.create_from_file(uploaded_io, article_id = nil, user, for_content)
     filename = uploaded_io.original_filename
     digest = Digest::MD5.hexdigest(filename + DateTime.current.to_s)
     filepath = Rails.root.join('public', 'uploads')
@@ -17,7 +17,7 @@ class Article::File < ApplicationRecord
       @doc = self.create(filepath: filepath,
         original_filename: filename,
         system_name: digest,
-        unique_index_for_new_article: id_form,
+        # unique_index_for_new_article: id_form,
         article_id: article_id,
         user: user,
         for_content: for_content)

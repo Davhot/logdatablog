@@ -5,6 +5,8 @@ class ArticlesController < ApplicationController
   before_action :set_article_files, only: %i(edit update)
   before_action :set_article_images, only: %i(load_editor_image edit update new
     create)
+  before_action :set_files_without_article, only: %i(new create)
+
   # TODO: генерить форму загрузки images с authenticity_token
   skip_before_action :verify_authenticity_token, only: :upload_image
 
@@ -17,16 +19,17 @@ class ArticlesController < ApplicationController
 
   def new
     @item = Article.new
-
-    @id_form = Digest::MD5.hexdigest(DateTime.current.to_s)
+    # @id_form = Digest::MD5.hexdigest(DateTime.current.to_s)
   end
 
   def create
     @item = Article.new(article_params)
+    @item.files = @article_files
+    @item.files << @article_images
     if @item.save
       redirect_to root_path, flash: {success: 'Статья успешно создана'}
     else
-      @id_form = params["id_form"]
+      # @id_form = params["id_form"]
       render :new
     end
   end
@@ -52,25 +55,27 @@ class ArticlesController < ApplicationController
 
   def upload_file
     if params[:id].present?
-      @article_file = Article::File.create_from_file(params["file"], nil,
+      @article_file = Article::File.create_from_file(params["file"],
         params["id"], current_user, false)
     else
-      @article_file = Article::File.create_from_file(params["file"],
-        params["id_form"], nil, current_user, false)
+      @article_file = Article::File.create_from_file(params["file"], nil,
+        current_user, false)
     end
   end
 
   def upload_image
     if params[:id].present?
-      @article_image = Article::File.create_from_file(params["editormd-image-file"], nil,
+      @article_image = Article::File.create_from_file(params["editormd-image-file"],
         params["id"], current_user, true)
+      @load_editor_image_path = load_editor_image_articles_path(id: params[:id])
     else
       @article_image = Article::File.create_from_file(params["editormd-image-file"],
-        params["id_form"], nil, current_user, true)
+        nil, current_user, true)
+      @load_editor_image_path = load_editor_image_articles_path
     end
     render json: {address: root_url + @article_image.server_path,
       title: @article_image.original_filename, status: 200,
-      load_editor_image_path: load_editor_image_article_path,
+      load_editor_image_path: @load_editor_image_path,
       message: 'Изображение загружено!'}
   end
 
@@ -98,6 +103,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def set_files_without_article
+    @article_files = Article::File.where(article_id: nil, for_content: false)
+  end
 
   def set_article_images
     if params[:id].present?

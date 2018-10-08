@@ -10,11 +10,11 @@ Rails.application.routes.draw do
       patch 'upload_file'
       get 'download_file'
       get 'delete_file'
-      post 'upload_image'
-      get 'load_editor_image'
     end
     collection do
-      patch 'upload_file'
+      post 'upload_file'
+      get 'load_editor_image'
+      post 'upload_image'
     end
   end
   resources :tags
