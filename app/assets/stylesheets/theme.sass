@@ -10,6 +10,7 @@
   margin-right: 2em
   z-index: 1
   margin-bottom: 3em
+  z-index: 1
 .card-img-top
   height: 300px
   object-fit: contain
@@ -38,3 +39,46 @@
   form
     width: 35em
     margin: auto
+
+#cool-bg
+  position: fixed
+  margin: 0
+  left: 0
+  top: 0
+  z-index: -1
+
+// Загнутые уголки
+/* тени для класса lifted */
+.lifted
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+  -moz-border-radius: 4px
+
+.lifted:before,
+.lifted:after
+  content: ""
+  position: absolute
+  z-index: -2
+  bottom: 15px
+  left: 10px
+  width: 50%
+  height: 5em
+  max-width: 300px
+  -webkit-box-shadow: 0 1.5em 1em rgba(0, 0, 0, 0.7)
+  -moz-box-shadow: 0 1.5em 1em rgba(0, 0, 0, 0.7)
+  box-shadow: 0 1.5em 1em rgba(0, 0, 0, 0.7)
+  -webkit-transform: rotate(-3deg)
+  -moz-transform: rotate(-3deg)
+  -ms-transform: rotate(-3deg)
+  -o-transform: rotate(-3deg)
+  transform: rotate(-3deg)
+
+.lifted:after
+  right: 10px
+  left: auto
+  -webkit-transform: rotate(3deg)
+  -moz-transform: rotate(3deg)
+  -ms-transform: rotate(3deg)
+  -o-transform: rotate(3deg)
+  transform: rotate(3deg)

@@ -22,6 +22,11 @@
 //= require editormd_en
 
 
+//= require svg
+//= require svg_filter
+//= require cool_bg
+
+
 //= require main
 //= require download_files
 //= require article
@@ -40,7 +45,7 @@ $(document).ready(function () {
     $(function() {
         testEditor = editormd("test-editormd", {
             width           : "100%",
-            height          : "1000",
+            height          : "600",
             path            : "/assets/lib/",
             htmlDecode      : "style,script,iframe",
             tex             : true,
@@ -67,5 +72,6 @@ $(document).ready(function () {
         flowChart       : true,  // 默认不解析
         sequenceDiagram : true,  // 默认不解析
       });
+      $("#editormd-view p:has(img)").css({'text-align': 'center'})
   })
 })

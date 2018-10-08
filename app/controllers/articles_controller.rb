@@ -15,6 +15,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    st = Statistic.find_or_create_by(ip: request.remote_ip, article: @item)
+    st.update_attribute(:count, st.count + 1)
   end
 
   def new
