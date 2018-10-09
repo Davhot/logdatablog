@@ -38,48 +38,39 @@
             %a.link{ href: '' } About
           %li
             %a.link{ href: '' } Contact
-    %hr.sidebar-content-separate/
+    %hr.sidebar-content-separate
     #about-me
       %h6 Обо мне
       %p Разраб, студент и просто отличный парень
-    %hr.sidebar-content-separate/
-    %form
-      %input.form-control.ds-input#search-input{ autocomplete: 'off',
-        placeholder: 'Поиск...', type: 'search' }
-      %button{ type: 'submit' } Go
-    %hr.sidebar-content-separate/
+    %hr.sidebar-content-separate
+    = simple_form_for Article.search(params).ransack(params[:q]), url: articles_path, method: :get do |f|
+      = f.input :title_or_content_or_describe_cont,
+        label: false,
+        required: false,
+        input_html: {class: 'form-control ds-input', autocomplete: 'off',
+          placeholder: 'Поиск...', type: 'search' }
+      = f.submit 'Go'
+    %hr.sidebar-content-separate
     %div
       %h6 Последние посты
       %ul.links-sidebar
-        %li
-          %a.link{ href: '' }
-            %p Регулярные выражения в Ruby
-        %li
-          %a.link{ href: '' }
-            %p Добавление файлов Ruby on Rails
-        %li
-          %a.link{ href: '' }
-            %p Пагинация и меняющийся title
-        %li
-          %a.link{ href: '' }
-            %p Добавление пользователей
-        %li
-          %a.link{ href: '' }
-            %p Модули и Примеси Ruby
-    %hr.sidebar-content-separate/
+        - Article.all.last(5).each do |article|
+          %li= link_to content_tag(:p, article.title), article_path(article),
+            class: 'link'
+    %hr.sidebar-content-separate
     %div
       %h6 Категории
       %ul.links-sidebar
         - Category.all.each do |category|
-          %li
-            %a.link{ href: '' }
-              %p= category.name
-    %hr.sidebar-content-separate/
+          %li= link_to content_tag(:p, category.name),
+            articles_path(category_id: category.id), class: 'link'
+    %hr.sidebar-content-separate
     #tags
       %h6 Теги
       - Tag.all.each do |tag|
-        %a{ href: '' }
-          %span.badge.badge-pill.badge-secondary= tag.name
+        = link_to content_tag(:span, tag.name,
+          class: 'badge badge-pill badge-secondary'),
+          articles_path(tag_id: tag.id)
     %hr.sidebar-content-separate
     = image_tag 'log-data-logo-white.png', id: 'logo',
       title: 'log-data-logo-white'

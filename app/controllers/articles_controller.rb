@@ -11,7 +11,11 @@ class ArticlesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :upload_image
 
   def index
-    @items = Article.all.order(created_at: :desc)
+    @items = (@q = Article.search(params).ransack(params[:q])).result
+    if @items.blank?
+      @items = Article.all
+      flash.now[:error] = "Не найдено ни одной статьи"
+    end
   end
 
   def show
