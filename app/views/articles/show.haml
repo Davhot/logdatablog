@@ -11,15 +11,15 @@
     %textarea
       = @item.content
 
-  - if @item.files.present?
+  - if @item.files_not_for_content.present?
     .row
       .col-md-12
         %strong.text-left
           %span Прикрепленные файлы
         %hr.hr-5
         %table.table.table-striped.table-hover
-          %tbody#article-files
-            - @item.files.each do |article_file|
+          %tbody#article-files_not_for_content
+            - @item.files_not_for_content.each do |article_file|
               = render 'article_file', article_file: article_file
   .card-footer.text-muted
     .row
