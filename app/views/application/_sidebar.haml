@@ -34,10 +34,8 @@
       %nav.menu
         %ul.menu-primary-items#menu-primary-items
           %li= link_to 'Home', root_path, class: 'link'
-          %li
-            %a.link{ href: '' } About
-          %li
-            %a.link{ href: '' } Contact
+          %li= link_to 'About', static_pages_about_path, class: 'link'
+          %li= link_to 'Contact', static_pages_contact_path, class: 'link'
     %hr.sidebar-content-separate
     #about-me
       %h6 Обо мне

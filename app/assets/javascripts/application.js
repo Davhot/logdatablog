@@ -30,6 +30,7 @@
 //= require main
 //= require download_files
 //= require article
+//= require static_pages
 
 $(document).ready(function () {
   $(".multiselect").multiSelect({
