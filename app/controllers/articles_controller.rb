@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :download_file]
   before_action :set_breadcrumbs, except: [:index]
   before_action :set_article, only: %i(show edit update destroy)
   before_action :set_article_files, only: %i(edit update)
