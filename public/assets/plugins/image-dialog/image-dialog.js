@@ -49,7 +49,7 @@
                                         "<input type=\"text\" value=\"" + selection + "\" data-alt id='editormd-image-dialog-title-input'/>" +
                                         "<br/>" +
                                         "<label>" + imageLang.link + "</label>" +
-                                        "<input type=\"text\" value=\"http://\" data-link id='editormd-image-dialog-link-input'/>" +
+                                        "<input type=\"text\" value=\"https://\" data-link id='editormd-image-dialog-link-input'/>" +
                                         "<br/>" +
                                     ( (settings.imageUpload) ? "</form>" : "</div>");
                 dialogContent = "<div id='images_container'></div>" + dialogContent
@@ -176,7 +176,7 @@
 			dialog = editor.find("." + dialogName);
 			dialog.find("[type=\"text\"]").val("");
 			dialog.find("[type=\"file\"]").val("");
-			dialog.find("[data-link]").val("http://");
+			dialog.find("[data-link]").val("https://");
 
 			this.dialogShowMask(dialog);
 			this.dialogLockScreen();

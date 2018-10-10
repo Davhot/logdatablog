@@ -79,7 +79,7 @@ class ArticlesController < ApplicationController
         nil, current_user, true)
       @load_editor_image_path = load_editor_image_articles_path
     end
-    render json: {address: root_url + @article_image.server_path,
+    render json: {address: root_path + @article_image.server_path,
       title: @article_image.original_filename, status: 200,
       load_editor_image_path: @load_editor_image_path,
       message: 'Изображение загружено!'}

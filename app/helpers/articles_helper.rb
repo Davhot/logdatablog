@@ -20,7 +20,7 @@ module ArticlesHelper
          'data-placement': 'bottom', 'title': 'Выбрать файл',
           class: 'set-article-image',
           id: "set-article-image-#{article_image.id}",
-          data: {address: root_url + article_image.server_path,
+          data: {address: root_path + article_image.server_path,
             title: article_image.original_filename } }
   end
 end

@@ -1,4 +1,4 @@
-server '192.168.111.111', user: 'david', roles: %w{app db}
+server '77.37.218.243', user: 'david', roles: %w{app db}
 
 set :branch, ENV['branch'] || 'develop'
 
