@@ -25,4 +25,8 @@ class Article < ApplicationRecord
       self.all
     end
   end
+  
+  def files_not_for_content
+    files.where(for_content: false)
+  end
 end
