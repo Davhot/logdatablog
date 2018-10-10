@@ -38,6 +38,24 @@ $(document).ready(function () {
     selectionHeader: "<div class='custom-header'>Выбранные элементы</div>"
   });
 
+  $('#scrollup').mouseover( function(){
+		$( this ).animate({opacity: 0.65},100);
+	}).mouseout( function(){
+		$( this ).animate({opacity: 1},100);
+	}).click( function(){
+		window.scroll(0 ,0);
+		return false;
+	});
+
+  $(window).scroll(function(){
+    var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+		if ( $(document).scrollTop() > 0 && scrollBottom > 0) {
+			$('#scrollup').fadeIn('fast');
+		} else {
+			$('#scrollup').fadeOut('fast');
+		}
+	});
+
   $('[data-toggle="tooltip"]').tooltip();
 
 
