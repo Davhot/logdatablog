@@ -8,11 +8,11 @@ app:
     - ./public:/usr/share/nginx/html
 
     - /home/david/uploads:/usr/src/app/public/uploads
-    # - ./public/uploads:/usr/share/nginx/html/uploads
     - tmp:/usr/src/app/tmp
     - "/var/run/postgresql:/var/run/postgresql"
   env_file:
     - database.env
+    - api_secret.env
   environment:
     RAILS_ENV: "${RAILS_ENV}"
   restart: always
@@ -27,7 +27,6 @@ nginx:
     - ./public:/usr/share/nginx/html
 
     - /home/david/uploads:/usr/share/nginx/html/uploads
-    # - ./public/uploads:/usr/share/nginx/html/uploads
     - "/share/logs/logdatablog_${RAILS_ENV}:/usr/src/app/log"
     - /home/david/ssl_sercificate:/usr/share/nginx/html/ssl_sercificate
   ports:

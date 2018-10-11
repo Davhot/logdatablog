@@ -4,7 +4,7 @@
 set :application, 'logdatablog'
 set :repo_url, 'https://github.com/Davhot/logdatablog.git'
 set :deploy_to, "/home/david/#{fetch(:application)}"
-set :linked_files, %w(database.env)
+set :linked_files, %w(database.env api_secret.env)
 set :linked_dirs, %w{ bundle }
 set :keep_releases, 3
 

@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   get 'static_pages/about'
   get 'static_pages/contact'
 
+  resources :authorizations, only: [] do
+    collection do
+      get 'get_vk_token'
+    end
+  end
+
   devise_for :users, controllers: { sessions: 'sessions' },
     path_names: { sign_in: 'login', sign_out: 'logout' }
   as :user do
