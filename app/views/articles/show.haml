@@ -23,12 +23,17 @@
               = render 'article_file', article_file: article_file
   .row
     .col-md-12
-      #comments-wrapper
-        %p Авторизуйтсь, чтобы оставлять комментарии
-        .socials
-          = link_to content_tag(:i, nil, class: 'fa fa-vk'), vk_url, { target: '_blank', class: 'social vk' }
-          = link_to content_tag(:i, nil, class: 'fa fa-facebook'), '', { target: '_blank', class: 'social fb' }
-          = link_to content_tag(:i, nil, class: 'fa fa-google'), '', { target: '_blank', class: 'social google' }
+      - if @auth_user.present?
+        = @auth_user.first_name
+        = @auth_user.last_name
+        = @auth_user.photo_url
+      - else
+        #comments-wrapper
+          %p Авторизуйтсь, чтобы оставлять комментарии
+          .socials
+            = link_to content_tag(:i, nil, class: 'fa fa-vk'), vk_url, { target: '_blank', class: 'social vk' }
+            = link_to content_tag(:i, nil, class: 'fa fa-facebook'), '', { target: '_blank', class: 'social fb' }
+            = link_to content_tag(:i, nil, class: 'fa fa-google'), '', { target: '_blank', class: 'social google' }
   .card-footer.text-muted
     .row
       .col-md-6.text-left

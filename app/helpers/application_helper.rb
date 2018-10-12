@@ -16,7 +16,7 @@ module ApplicationHelper
       redirect_uri: redirect_uri,
       scope: '0',
       response_type: 'code',
-      v: '5.85',
+      v: Socials::API::VK::VERSION,
       state: Digest::MD5.hexdigest(Time.current.to_s)
     }
     a = []

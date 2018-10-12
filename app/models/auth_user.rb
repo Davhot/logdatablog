@@ -10,9 +10,6 @@ class AuthUser < ApplicationRecord
     user.access_token = data['access_token']
     user.user_id = data['user_id']
     user.expires_in = data['expires_in']
-    user.first_name = ''
-    user.last_name = ''
-    user.photo_url = ''
     user.social = 'vk'
 
     user.save

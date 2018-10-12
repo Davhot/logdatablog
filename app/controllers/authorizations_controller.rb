@@ -2,12 +2,18 @@ class AuthorizationsController < ApplicationController
   def get_vk_token
     message = [:error, 'Нет прав!']
     if params['code'].present?
-      data = Authorization::API::VK.get_access_token(params[:code],
+      api_vk = Socials::API::VK.new
+      data = api_vk.get_access_token(params[:code],
         session[:vk_redirect_uri])
       if valid_vk_data?(data)
         user = AuthUser.save_from_data_vk(data)
         if user.valid?
           session[:unique_id] = user.unique_id
+          response = api_vk.get_user_info(user.access_token, user.user_id)
+          user.first_name = response[0]
+          user.last_name = response[1]
+          user.photo_url = response[2]
+          user.save
           message = [:success, 'Вы успешно авторизовались!']
         else
           message = [:error, 'Авторизация не выполнена, повторите попытку']
@@ -17,7 +23,7 @@ class AuthorizationsController < ApplicationController
       end
     end
     flash[message[0]] = message[1]
-    redirect_to static_pages_contact_path
+    redirect_to session.delete(:return_to)
   end
 
   private
