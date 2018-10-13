@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :download_file]
+  before_action :authenticate_user!, except: [:index, :show, :download_file,
+    :create_comment]
   before_action :set_breadcrumbs, except: [:index]
-  before_action :set_article, only: %i(show edit update destroy)
+  before_action :set_article, only: %i(show edit update destroy create_comment)
   before_action :set_article_files, only: %i(edit update)
   before_action :set_article_images, only: %i(load_editor_image edit update new
     create)
@@ -21,6 +22,7 @@ class ArticlesController < ApplicationController
   def show
     st = Statistic.find_or_create_by(ip: request.remote_ip, article: @item)
     st.update_attribute(:count, st.count + 1)
+    @comments = @item.comments.order(:created_at)
   end
 
   def new
@@ -108,6 +110,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def create_comment
+    @article_comment = Article::Comment.create(article_comment_params)
+  end
+
   private
 
   def set_files_without_article
@@ -129,6 +135,11 @@ class ArticlesController < ApplicationController
 
   def set_article
     @item = Article.find(params[:id])
+  end
+
+  def article_comment_params
+    params.require(:article_comment).permit(:content, :parent_id, :article_id,
+      :auth_user_id)
   end
 
   def article_params

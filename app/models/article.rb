@@ -4,6 +4,7 @@ class Article < ApplicationRecord
   has_many :photos
   has_many :files, class_name: 'Article::File'
   has_many :statistics
+  has_many :comments, class_name: 'Article::Comment'
   has_and_belongs_to_many :tags
 
   validates :title, :content, :describe, :category_id, presence: true
@@ -13,7 +14,7 @@ class Article < ApplicationRecord
   end
 
   def views
-    statistics.pluck(:count).sum
+    statistics.count
   end
 
   def self.search(params)
@@ -25,7 +26,7 @@ class Article < ApplicationRecord
       self.all
     end
   end
-  
+
   def files_not_for_content
     files.where(for_content: false)
   end

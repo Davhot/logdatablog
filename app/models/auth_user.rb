@@ -3,9 +3,15 @@ class AuthUser < ApplicationRecord
   def self.save_from_data_vk(data)
     unique_id = self.generate_unique_id(data)
     user = self.find_by(unique_id: unique_id)
-    if user.blank?
+    old_user = self.find_by(user_id: data['user_id'])
+    if user.blank? && old_user.blank?
       user = self.new
       user.unique_id = unique_id
+    elsif user.blank? && old_user.present?
+      user = old_user
+      user.unique_id = unique_id
+    elsif user.present? && old_user.present?
+      return nil # вырожденный случай
     end
     user.access_token = data['access_token']
     user.user_id = data['user_id']

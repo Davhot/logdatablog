@@ -1,0 +1,12 @@
+.comment
+  .auth_user_container
+    = image_tag comment.auth_user.photo_url
+    %p
+      = comment.auth_user.first_name
+      = comment.auth_user.last_name
+  .article_comment
+    .article_comment_content_show
+      = comment.content
+    .time_comment
+      = distance_of_time_in_words(comment.created_at,
+        Time.now, locale: :en) + ' ago'

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       patch 'upload_file'
       get 'download_file'
       get 'delete_file'
+      post 'create_comment'
     end
     collection do
       post 'upload_file'

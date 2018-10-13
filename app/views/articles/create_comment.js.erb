@@ -1,0 +1,15 @@
+<%- if @article_comment.valid? %>
+  $('.article_comment_form_container .errors').html('')
+  $('#article_comment_content').removeClass('has-error')
+  $("#article_comments").append("<%= j render 'comment', comment: @article_comment %>")
+  $(".comment .article_comment_content_show").last().animate({'background-color': '#ccc'}, 'fast');
+  $(".comment .article_comment_content_show").last().animate({'background-color': 'white'}, 'fast');
+  $("#article_comment_content").val('')
+<%- else %>
+  $('#article_comment_content').addClass('has-error')
+  $('.article_comment_form_container .errors').html('')
+  <%- @article_comment.errors.messages.values.flatten.each do |mes| %>
+    $('.article_comment_form_container .errors').append("<li><%= mes %></li>")
+  <%- end %>
+  console.log("<%= @article_comment.errors.messages.values.flatten.inspect %>")
+<%- end %>

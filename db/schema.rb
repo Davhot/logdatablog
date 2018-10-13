@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181011084151) do
+ActiveRecord::Schema.define(version: 20181013150848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "article_comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "auth_user_id"
+    t.integer  "article_id"
+    t.integer  "parent_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["article_id"], name: "index_article_comments_on_article_id", using: :btree
+    t.index ["auth_user_id"], name: "index_article_comments_on_auth_user_id", using: :btree
+  end
 
   create_table "article_files", force: :cascade do |t|
     t.string   "original_filename",                            null: false
@@ -115,6 +126,8 @@ ActiveRecord::Schema.define(version: 20181011084151) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "article_comments", "articles"
+  add_foreign_key "article_comments", "auth_users"
   add_foreign_key "article_files", "articles"
   add_foreign_key "article_files", "users"
   add_foreign_key "articles", "categories"
