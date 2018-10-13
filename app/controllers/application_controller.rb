@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
 
   def current_auth_user
     user = AuthUser.find_by(unique_id: session[:unique_id])
-    if user.present? && (user.created_at + user.expires_in.to_i) < Time.current
+    if Rails.env.production? && user.present? &&
+      (user.created_at + user.expires_in.to_i) < Time.current
       user.destroy
       session.delete(:unique_id)
     end
@@ -17,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def save_previous_redirect
+    session[:unique_id] = 'qwerty' if Rails.env.development?
     session[:return_to] ||= request.referer
   end
 
