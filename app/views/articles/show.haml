@@ -26,7 +26,9 @@
       #article_comments
         - @comments.each do |comment|
           = render 'comment', comment: comment
-  .row
+          - comment.tree.each do |children_comment|
+            = render 'comment', comment: children_comment
+  .row#comment-0-form
     .col-md-12
       - if @auth_user.present?
         = simple_form_for Article::Comment.new,

@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   def show
     st = Statistic.find_or_create_by(ip: request.remote_ip, article: @item)
     st.update_attribute(:count, st.count + 1)
-    @comments = @item.comments.order(:created_at)
+    @comments = @item.comments.where(parent_id: nil).order(:created_at)
   end
 
   def new
@@ -139,7 +139,7 @@ class ArticlesController < ApplicationController
 
   def article_comment_params
     params.require(:article_comment).permit(:content, :parent_id, :article_id,
-      :auth_user_id)
+      :auth_user_id, :parent_id)
   end
 
   def article_params

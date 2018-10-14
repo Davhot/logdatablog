@@ -1,0 +1,16 @@
+= simple_form_for Article::Comment.new,
+  url: create_comment_article_path, remote: true do |f|
+  = f.hidden_field :article_id, value: @item.id
+  = f.hidden_field :auth_user_id, value: @auth_user.id
+  = f.hidden_field :parent_id, value: comment.id
+  .auth_user_container
+    = image_tag @auth_user.photo_url
+    %p
+      = @auth_user.first_name
+      = @auth_user.last_name
+  .form-group.article_comment_form_container
+    = f.input :content,
+      input_html: { class: "message", rows: '3', placeholder: 'Введите комментарий...' },
+      label: false
+    %ul.errors
+    = f.submit 'Отправить', class: 'btn btn-outline-secondary'
