@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :download_file,
-    :create_comment]
+    :create_comment, :delete_comment, :edit_comment]
   before_action :set_breadcrumbs, except: [:index]
   before_action :set_article, only: %i(show edit update destroy create_comment)
   before_action :set_article_files, only: %i(edit update)
@@ -112,6 +112,21 @@ class ArticlesController < ApplicationController
 
   def create_comment
     @article_comment = Article::Comment.create(article_comment_params)
+  end
+
+  def edit_comment
+    comment = Article::Comment.find(params['comment_id'])
+    if comment.auth_user == @auth_user
+      comment.update_attribute(:content, params['content'])
+    end
+  end
+
+  def remove_comment
+    comment = Article::Comment.find(params['comment_id'])
+    if comment.auth_user == @auth_user
+      @comment_id = comment.id
+      comment.destroy
+    end
   end
 
   private

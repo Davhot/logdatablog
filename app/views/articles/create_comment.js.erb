@@ -6,9 +6,11 @@
   if ($(".parent-comment-<%= @article_comment.parent_id %>").length > 0){
     $(".parent-comment-<%= @article_comment.parent_id %>").last().next()
       .after("<%= j render 'comment', comment: @article_comment %>");
-  } else {
+  } else if ($("#comment-<%= @article_comment.parent_id %>").length > 0 ) {
     $("#comment-<%= @article_comment.parent_id %>").last().next()
       .after("<%= j render 'comment', comment: @article_comment %>");
+  } else {
+    $('#article_comments').append("<%= j render 'comment', comment: @article_comment %>")
   }
 
   // Подсветка добавленного комментария

@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
   def current_auth_user
     user = AuthUser.find_by(unique_id: session[:unique_id])
     if Rails.env.production? && user.present? &&
-      (user.created_at + user.expires_in.to_i) < Time.current
-      # user.destroy
+      (user.updated_at + user.expires_in.to_i) < Time.current
       session.delete(:unique_id)
     end
     @auth_user = ((session[:unique_id].present? && AuthUser.exists?(user)) ? user : nil)
