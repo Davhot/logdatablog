@@ -1,13 +1,17 @@
 .comment{ id: "comment-#{comment.id}", class: "parent-comment-#{comment.parent_id}",
   'data-offset': comment.depth }
   .auth_user_container
-    = image_tag comment.auth_user.photo_url
-    %p
-      = comment.auth_user.first_name
-      = comment.auth_user.last_name
+    - if comment.auth_user.user.present?
+      = image_tag 'a2'
+      %p Admin
+    - else
+      = image_tag comment.auth_user.photo_url
+      %p
+        = comment.auth_user.first_name
+        = comment.auth_user.last_name
   .article_comment
     .article_comment_content_show
-      %div{ contenteditable: "#{@auth_user.present? && comment.auth_user == @auth_user}",
+      %div{ contenteditable: "#{may_edit_comment?(comment)}",
         'data-url': edit_comment_article_path(comment_id: comment.id) }
         - (a = comment.content.split("\n")).each_with_index do |line, index|
           = line
@@ -17,7 +21,7 @@
         %btn.link.answer-comment{ 'data-target': "#comment-#{comment.id}-form" } ответить
       = distance_of_time_in_words(comment.created_at,
         Time.now, locale: :en) + ' ago'
-  - if @auth_user.present? && comment.auth_user == @auth_user && Article::Comment.children(comment.id).empty?
+  - if may_remove_comment?(comment)
     .comment-controls
       = link_to content_tag(:i, nil, class: 'fa fa-trash'),
         remove_comment_article_path(comment_id: comment.id),

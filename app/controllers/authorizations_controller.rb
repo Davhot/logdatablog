@@ -9,7 +9,7 @@ class AuthorizationsController < ApplicationController
         user = AuthUser.save_from_data_vk(data)
         if user.present? && user.valid?
           session[:unique_id] = user.unique_id
-          response = api_vk.get_user_info(user.access_token, user.user_id)
+          response = api_vk.get_user_info(user.access_token, user.social_user_id)
           user.first_name = response[0]
           user.last_name = response[1]
           user.photo_url = response[2]

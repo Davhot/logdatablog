@@ -23,4 +23,15 @@ module ArticlesHelper
           data: {address: root_path + article_image.server_path,
             title: article_image.original_filename } }
   end
+
+  def may_remove_comment?(comment)
+    @auth_user.present? &&
+      (comment.auth_user == @auth_user || @auth_user.user.present?) &&
+      Article::Comment.children(comment.id).empty?
+  end
+
+  def may_edit_comment?(comment)
+    @auth_user.present? &&
+      (comment.auth_user == @auth_user || @auth_user.user.present?)
+  end
 end

@@ -36,10 +36,14 @@
           = f.hidden_field :article_id, value: @item.id
           = f.hidden_field :auth_user_id, value: @auth_user.id
           .auth_user_container
-            = image_tag @auth_user.photo_url
-            %p
-              = @auth_user.first_name
-              = @auth_user.last_name
+            - if @auth_user.user.present?
+              = image_tag 'a2'
+              %p Admin
+            - else
+              = image_tag @auth_user.photo_url
+              %p
+                = @auth_user.first_name
+                = @auth_user.last_name
           .form-group.article_comment_form_container
             = f.input :content,
               input_html: { class: "message", rows: '3', placeholder: 'Введите комментарий...' },

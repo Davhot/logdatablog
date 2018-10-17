@@ -1,9 +1,10 @@
 class AuthUser < ApplicationRecord
+  belongs_to :user, required: false
 
   def self.save_from_data_vk(data)
     unique_id = self.generate_unique_id(data)
     user = self.find_by(unique_id: unique_id)
-    old_user = self.find_by(user_id: data['user_id'])
+    old_user = self.find_by(social_user_id: data['user_id'])
     if user.blank? && old_user.blank?
       user = self.new
       user.unique_id = unique_id
@@ -14,7 +15,7 @@ class AuthUser < ApplicationRecord
       return nil # вырожденный случай
     end
     user.access_token = data['access_token']
-    user.user_id = data['user_id']
+    user.social_user_id = data['user_id']
     user.expires_in = data['expires_in']
     user.social = 'vk'
 
