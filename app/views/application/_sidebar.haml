@@ -17,7 +17,8 @@
     #author-info
       = image_tag 'a2', id: 'avatar'
       %strong David
-      %p Join me
+      %p Join me&nbsp;
+      %b david.home@mail.ru
       .social-media-icons
         %ul
           %li
@@ -34,6 +35,7 @@
       %nav.menu
         %ul.menu-primary-items#menu-primary-items
           %li= link_to 'Home', root_path, class: 'link'
+          %li= link_to 'Tutorial', tutorial_articles_path, class: 'link'
           %li= link_to 'About', static_pages_about_path, class: 'link'
           %li= link_to 'Contact', static_pages_contact_path, class: 'link'
     %hr.sidebar-content-separate

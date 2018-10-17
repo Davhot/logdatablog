@@ -16,7 +16,7 @@
             Категория:
             = article.category.name
           %p
-            - article.tags.each do |tag|
+            - article.reload.tags.each do |tag|
               %span.badge.badge-pill.badge-secondary= tag.name
         .col-md-6.text-right
           %p.card-text= distance_of_time_in_words(article.created_at,

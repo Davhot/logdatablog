@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       post 'upload_file'
       get 'load_editor_image'
       post 'upload_image'
+      get 'tutorial'
     end
   end
   resources :tags

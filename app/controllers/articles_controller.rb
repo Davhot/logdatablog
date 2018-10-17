@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :download_file,
-    :create_comment, :delete_comment, :edit_comment]
+    :create_comment, :delete_comment, :edit_comment, :tutorial]
   before_action :set_breadcrumbs, except: [:index]
   before_action :set_article, only: %i(show edit update destroy create_comment)
   before_action :set_article_files, only: %i(edit update)
@@ -12,12 +12,27 @@ class ArticlesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :upload_image
 
   def index
+    session[:tutorial] = false
     @items = (@q = Article.search(params).ransack(params[:q])).result
     if @items.blank?
       @items = Article.all
       flash.now[:error] = "Не найдено ни одной статьи"
     end
-    @items = @items.page params[:page]
+    @items = @items
+      .where
+      .not(id: Article.unscoped.joins(:tags).where(tags: {name: 'Tutorial'}).uniq.ids)
+      .page(params[:page])
+  end
+
+  def tutorial
+    session[:tutorial] = true
+    @items = (@q = Article.search(params).ransack(params[:q])).result
+    if @items.blank?
+      @items = Article.all
+      flash.now[:error] = "Не найдено ни одной статьи"
+    end
+    @items = @items.includes(:tags).where(tags: {name: 'Tutorial'}).uniq.page params[:page]
+    render 'index'
   end
 
   def show
@@ -55,10 +70,11 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    path = session[:tutorial] ? tutorial_articles_path : articles_path
     if @item.destroy
-      redirect_to articles_path, flash: {success: 'Статья успешно удалена'}
+      redirect_to path, flash: {success: 'Статья успешно удалена'}
     else
-      redirect_to articles_path, flash: {error: 'Статья не удалена'}
+      redirect_to path, flash: {error: 'Статья не удалена'}
     end
   end
 

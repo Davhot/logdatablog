@@ -5,11 +5,14 @@
     .col-md-12
       %ul.breadcrumb
         - if controller == 'articles' && action == 'show'
-          %li.breadcrumb-item= link_to t(controller + '.index'), root_path
+          - if session[:tutorial]
+            %li.breadcrumb-item= link_to t(controller + '.index'), tutorial_articles_path
+          - else
+            %li.breadcrumb-item= link_to t(controller + '.index'), root_path
           %li.breadcrumb-item.active= t(controller + '.show')
         - else
           - case action
-          - when 'index'
+          - when 'index', 'tutorial'
             %li.breadcrumb-item.active= t(controller + '.index')
           - when 'show'
             %li.breadcrumb-item= link_to t(controller + '.index'),
