@@ -1,6 +1,7 @@
 class Article::Comment < ApplicationRecord
   belongs_to :auth_user
   belongs_to :article
+  belongs_to :parent, class_name: 'Article::Comment', foreign_key: 'parent_id', required: false
 
   validates :content, presence: true
 
@@ -13,6 +14,15 @@ class Article::Comment < ApplicationRecord
 
   def self.children(id)
     Article::Comment.where(parent_id: id).ids
+  end
+
+  def right_leaf
+    elem = self
+    while elem.present?
+      prev = elem
+      elem = Article::Comment.where(parent_id: elem.id).last
+    end
+    prev
   end
 
   def tree

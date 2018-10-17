@@ -3,15 +3,12 @@
   $('textarea').removeClass('has-error');
 
   // Вставка комментария в нужную позицию
-  if ($(".parent-comment-<%= @article_comment.parent_id %>").length > 0){
-    $(".parent-comment-<%= @article_comment.parent_id %>").last().next()
-      .after("<%= j render 'comment', comment: @article_comment %>");
-  } else if ($("#comment-<%= @article_comment.parent_id %>").length > 0 ) {
-    $("#comment-<%= @article_comment.parent_id %>").last().next()
-      .after("<%= j render 'comment', comment: @article_comment %>");
-  } else {
+  <%- if @comment_id.present? %>
+    elem = $("#comment-<%= @comment_id %>");
+    elem.next().after("<%= j render 'comment', comment: @article_comment %>");
+  <%- else %>
     $('#article_comments').append("<%= j render 'comment', comment: @article_comment %>")
-  }
+  <%- end %>
 
   // Подсветка добавленного комментария
   $("#comment-<%= @article_comment.id %> .article_comment_content_show")
@@ -22,12 +19,12 @@
   $("textarea").val('');
 
   // скрыть все окна ввода сообщений для ответа
-  $('.answer-comment').click(function () {
-    $('.comment-form').not('.d-none').addClass('d-none')
-    target = $(this).data('target')
-    $(target).toggleClass('d-none')
+  $('#comment-<%= @article_comment.id %> .answer-comment').click(function () {
+    var target = $(this).data('target');
+    $('.comment-form').not('.d-none').not(target).addClass('d-none');
+    $(target).toggleClass('d-none');
   })
-  $('.comment').each(function () {
+  $('#comment-<%= @article_comment.id %>').each(function () {
     $(this).css({'margin-left': $(this).data('offset') * 2 + 'em'})
   })
 

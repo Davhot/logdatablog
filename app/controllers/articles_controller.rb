@@ -128,6 +128,10 @@ class ArticlesController < ApplicationController
   end
 
   def create_comment
+    if params['article_comment']['parent_id'].present?
+      @comment_id = Article::Comment.find(params['article_comment']['parent_id'])
+        .right_leaf.id
+    end
     @article_comment = Article::Comment.create(article_comment_params)
   end
 
