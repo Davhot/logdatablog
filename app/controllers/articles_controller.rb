@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
       @items = Article.all
       flash.now[:error] = "Не найдено ни одной статьи"
     end
+    @items = @items.page params[:page]
   end
 
   def show

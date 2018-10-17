@@ -28,6 +28,7 @@ gem 'devise', '~> 4.4.3'
 gem 'haml_lint', require: false
 gem 'simple_form', '~> 4.0.1'
 gem 'ransack'
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
 gem 'coderay'
 

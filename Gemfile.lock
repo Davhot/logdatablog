@@ -1,4 +1,21 @@
 GIT
+  remote: https://github.com/kaminari/kaminari
+  revision: 6cb907d61e936fe2fd1e0d361d0f91ac6d509a83
+  specs:
+    kaminari (1.1.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
+      actionview
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
+      activerecord
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
+
+GIT
   remote: https://github.com/netguru/capistrano-docker.git
   revision: 873aa5fdce66c6962dad555a914d31d4fdc77f5c
   specs:
@@ -262,6 +279,7 @@ DEPENDENCIES
   jquery-fileupload-rails (= 0.4.7)
   jquery-rails (~> 4.3.3)
   jquery-ui-rails (~> 6.0.1)
+  kaminari!
   listen (~> 3.0.5)
   pg (~> 0.18)
   puma (~> 3.0)
