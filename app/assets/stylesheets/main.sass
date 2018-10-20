@@ -6,7 +6,10 @@ $min-height-main-content: 90%
 
 // sidebar
 $navbar-inverse-bg: gray
-$sidebar-width: 300px
+
+$sidebar-width-up-sm: 300px
+$sidebar-width-down-sm: 100%
+
 $sidebar-bg: lighten(black, 20%)
 $sidebar-link-color: white
 $sidebar-link-hover-bg: lighten(black, 30%)
@@ -16,6 +19,8 @@ body
   background-color: $white
   width: 100%
   font-family: "Montserrat", sans-serif !important
+  @include media-breakpoint-down(sm)
+    font-size: 1.5em
 // плавное изменение ссылки кнопки при наведении
 .link
   line-height: 1

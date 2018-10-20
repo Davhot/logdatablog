@@ -87,9 +87,9 @@ $(document).ready(function () {
         htmlDecode      : "style,script,iframe",  // you can filter tags decode
         emoji           : true,
         taskList        : true,
-        tex             : true,  // 默认不解析
-        flowChart       : true,  // 默认不解析
-        sequenceDiagram : true,  // 默认不解析
+        tex             : true,
+        flowChart       : true,
+        sequenceDiagram : true,
       });
       $("#editormd-view p:has(img)").css({'text-align': 'center'})
   })

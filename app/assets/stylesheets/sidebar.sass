@@ -74,17 +74,22 @@
       color: $sidebar-link-color
   &.toggled
     #sidebar-wrapper
-      width: $sidebar-width
+      width: $sidebar-width-up-sm
     #sidebar-toggle
-      left: $sidebar-width
+      left: $sidebar-width-up-sm
+    @include media-breakpoint-down(sm)
+      #sidebar-wrapper
+        width: calc(#{$sidebar-width-down-sm} - 45px)
+      #sidebar-toggle
+        left: calc(#{$sidebar-width-down-sm} - 45px)
 
 #sidebar-wrapper
   z-index: 500
   position: fixed
-  left: $sidebar-width
+  left: $sidebar-width-up-sm
   width: 0
   height: 100%
-  margin-left: -$sidebar-width
+  margin-left: -$sidebar-width-up-sm
   overflow-y: auto
   background-color: $sidebar-bg
   transition: all 0.5s ease
@@ -98,7 +103,7 @@
 
 @include media-breakpoint-up(sm)
   #wrapper
-    padding-left: calc(#{$sidebar-width} + 30px)
+    padding-left: calc(#{$sidebar-width-up-sm} + 30px)
     &.toggled
       padding-left: 30px
       #sidebar-wrapper
@@ -109,9 +114,12 @@
       #sidebar-toggle
         left: 0
     #sidebar-toggle
-      left: $sidebar-width
+      left: $sidebar-width-up-sm
   #sidebar-wrapper
-    width: $sidebar-width
+    width: $sidebar-width-up-sm
+@include media-breakpoint-down(sm)
+  #sidebar-toggle i
+    font-size: 1.5em
 ////////////////////////////////////////////////////////////////////////////////
 
 // sidebar content
@@ -161,6 +169,6 @@
   text-decoration: none
 
 #logo
-  width: calc(#{$sidebar-width} - 50px)
+  width: calc(#{$sidebar-width-up-sm} - 50px)
   height: auto
   margin-bottom: 2em

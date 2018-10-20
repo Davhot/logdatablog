@@ -18,7 +18,7 @@
           %span Прикрепленные файлы
         %hr.hr-5
         %table.table.table-striped.table-hover
-          %tbody#article-files_not_for_content
+          %tbody#article-files-not-for-content
             - @item.files_not_for_content.each do |article_file|
               = render 'article_file', article_file: article_file
   .row
@@ -65,7 +65,13 @@
         %p
           - @item.tags.each do |tag|
             %span.badge.badge-pill.badge-secondary= tag.name
-      .col-md-6.text-right
+      .col-md-6.text-right.d-none.d-md-block
+        %p.card-text= distance_of_time_in_words(@item.created_at,
+          Time.now, locale: :en) + ' ago'
+        %p
+          %i.fa.fa-eye
+          = @item.views
+      .col-md-6.text-left.d-md-none
         %p.card-text= distance_of_time_in_words(@item.created_at,
           Time.now, locale: :en) + ' ago'
         %p
