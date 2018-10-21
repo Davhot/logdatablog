@@ -121,7 +121,6 @@ class ArticlesController < ApplicationController
       @article_images = Article::File.where(for_content: true, article_id: nil)
     end
     if current_user.present? && doc.user == current_user
-      File.delete(doc.filepath) if File.exists?(doc.filepath)
       @doc_id = doc.id
       doc.destroy
     end

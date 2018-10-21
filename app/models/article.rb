@@ -1,10 +1,9 @@
 class Article < ApplicationRecord
   default_scope { order(created_at: :desc) }
   belongs_to :category
-  has_many :photos
-  has_many :files, class_name: 'Article::File'
-  has_many :statistics
-  has_many :comments, class_name: 'Article::Comment'
+  has_many :files, class_name: 'Article::File', dependent: :destroy
+  has_many :statistics, dependent: :destroy
+  has_many :comments, class_name: 'Article::Comment', dependent: :destroy
   has_and_belongs_to_many :tags
 
   validates :title, :content, :describe, :category_id, presence: true

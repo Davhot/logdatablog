@@ -2,6 +2,8 @@ class Article::File < ApplicationRecord
   belongs_to :article, required: false
   belongs_to :user
 
+  before_destroy :remove_file
+
   validates :original_filename, :system_name, :filepath, presence: true
 
   def self.create_from_file(uploaded_io, article_id = nil, user, for_content)
@@ -23,6 +25,10 @@ class Article::File < ApplicationRecord
         for_content: for_content)
     end
     @doc
+  end
+
+  def remove_file
+    File.delete(filepath) if File.exists?(filepath)
   end
 
   def info
