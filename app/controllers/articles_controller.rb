@@ -138,7 +138,7 @@ class ArticlesController < ApplicationController
   def edit_comment
     comment = Article::Comment.find(params['comment_id'])
     if comment.auth_user == @auth_user
-      comment.update_attribute(:content, params['content'])
+      comment.update_attribute(:content, params['value'])
     end
   end
 

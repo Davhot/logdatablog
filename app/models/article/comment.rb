@@ -13,14 +13,14 @@ class Article::Comment < ApplicationRecord
   end
 
   def self.children(id)
-    Article::Comment.where(parent_id: id).ids
+    Article::Comment.where(parent_id: id).order(:created_at).ids
   end
 
   def right_leaf
     elem = self
     while elem.present?
       prev = elem
-      elem = Article::Comment.where(parent_id: elem.id).last
+      elem = Article::Comment.where(parent_id: elem.id).order(:created_at).last
     end
     prev
   end

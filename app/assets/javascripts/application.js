@@ -26,6 +26,7 @@
 //= require svg_filter
 //= require cool_bg
 
+//= require bootstrap-editable
 
 //= require main
 //= require download_files

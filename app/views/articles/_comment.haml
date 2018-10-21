@@ -10,17 +10,23 @@
         = comment.auth_user.first_name
         = comment.auth_user.last_name
   .article_comment
-    .article_comment_content_show
-      %div{ contenteditable: "#{may_edit_comment?(comment)}",
-        'data-url': edit_comment_article_path(comment_id: comment.id) }
-        - (a = comment.content.split("\n")).each_with_index do |line, index|
-          = line
-          %br
-    .time_comment
+    .article_comment_content_show.text-left
+      - if may_edit_comment?(comment)
+        = link_to comment.content, '#', class: "comment-content",
+          id: "comment-content-#{comment.id}",
+          'data-url': edit_comment_article_path(comment_id: comment.id)
+      - else
+        %div
+          - comment.content.split("\n").each_with_index do |line, index|
+            = line
+            %br
+    .time_comment.row
       - if @auth_user.present?
-        %btn.link.answer-comment{ 'data-target': "#comment-#{comment.id}-form" } ответить
-      = distance_of_time_in_words(comment.created_at,
-        Time.now, locale: :en) + ' ago'
+        .col-5.text-left
+          %btn.link.answer-comment{ 'data-target': "#comment-#{comment.id}-form" } ответить
+      .col-7
+        %p.text-right= distance_of_time_in_words(comment.created_at,
+          Time.now, locale: :en) + ' ago'
   - if may_remove_comment?(comment)
     .comment-controls
       = link_to content_tag(:i, nil, class: 'fa fa-trash'),

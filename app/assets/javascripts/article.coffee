@@ -4,12 +4,23 @@ $ ->
   $('.answer-comment').click show_comment_form
   $('.comment').each ->
     $(this).css({'margin-left': $(this).data('offset') * 2 + 'em'})
-  $(".article_comment_content_show div[contenteditable=\"true\"]").each ->
+  $(".comment-content").each ->
     elem = $(this)
-    $(this).focusout ->
-      url = $(this).data('url')
-      data = {content: $(this).text()}
-      $.ajax(url: url, data: data)
+    $(this).editable({
+       type:  'textarea',
+       pk:    1,
+       id:    $(this).attr('id'),
+       url:   $(this).data('url'),
+       title: 'Enter comments',
+       mode: 'inline',
+       ajaxOptions: {type: "GET"}
+    })
+  $(".comment-content").click (e) ->
+    e.preventDefault()
+    # $(this).focusout ->
+    #   url = $(this).data('url')
+    #   data = {content: $(this).text()}
+    #   $.ajax(url: url, data: data)
 
 show_comment_form = ->
   target = $(this).data('target')

@@ -28,6 +28,17 @@
     $(this).css({'margin-left': $(this).data('offset') * 2 + 'em'})
   })
 
+  // Возможность редактировать комментарий
+  $("#comment-<%= @article_comment.id %> a.comment-content").editable({
+     type:  'textarea',
+     pk:    1,
+     id:    $(this).attr('id'),
+     url:   $(this).data('url'),
+     title: 'Enter comments',
+     mode: 'inline',
+     ajaxOptions: {type: "GET"}
+  })
+
   // Скролл до добавленного комментария
   var elem = $("#comment-<%= @article_comment.id %>")
   $('html, body').animate({
