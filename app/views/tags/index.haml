@@ -5,10 +5,11 @@
     - @items.each do |tag|
       %span.badge.badge-pill.badge-secondary
         = tag.name
-        = link_to content_tag(:i, nil, class: 'fa fa-pencil'),
-          edit_tag_path(tag)
-        = link_to content_tag(:i, nil, class: 'fa fa-trash'), tag_path(tag),
-          method: :delete, data: { confirm: 'Вы уверены?' }
+        - if tag.name != 'Tutorial'
+          = link_to content_tag(:i, nil, class: 'fa fa-pencil'),
+            edit_tag_path(tag)
+          = link_to content_tag(:i, nil, class: 'fa fa-trash'), tag_path(tag),
+            method: :delete, data: { confirm: 'Вы уверены?' }
 
 .col-12
   .create-btn.row
