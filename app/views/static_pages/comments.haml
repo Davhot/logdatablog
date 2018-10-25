@@ -3,3 +3,11 @@
   - data[1].each do |comment|
     - @item = comment.article
     = render 'articles/comment', comment: comment
+
+%hr
+%h3 Комментарии со страницы Contact
+- @contact_comments.each do |comment|
+  %p= comment.content
+  %hr
+
+= paginate @contact_comments

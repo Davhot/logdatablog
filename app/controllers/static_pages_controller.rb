@@ -9,5 +9,6 @@ class StaticPagesController < ApplicationController
 
   def comments
     @comments = Article.all.map{|x| [x.title, x.comments]}.select{|x| x[1].size > 0}
+    @contact_comments = Comment.order(:created_at).all.page params[:page]
   end
 end
