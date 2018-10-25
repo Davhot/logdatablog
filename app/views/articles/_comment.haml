@@ -14,7 +14,7 @@
       - if may_edit_comment?(comment)
         = link_to comment.content, '#', class: "comment-content",
           id: "comment-content-#{comment.id}",
-          'data-url': edit_comment_article_path(comment_id: comment.id)
+          'data-url': edit_comment_article_path(comment_id: comment.id, id: comment.article.id)
       - else
         %div
           - comment.content.split("\n").each_with_index do |line, index|
@@ -30,8 +30,8 @@
   - if may_remove_comment?(comment)
     .comment-controls
       = link_to content_tag(:i, nil, class: 'fa fa-trash'),
-        remove_comment_article_path(comment_id: comment.id),
+        remove_comment_article_path(comment_id: comment.id, id: comment.article.id),
         data: {confirm: 'Вы уверены?'}, remote: true
 - if @auth_user.present?
   %div.comment-form.d-none{ id: "comment-#{comment.id}-form" }
-    = render 'answer_comment', comment: comment
+    = render 'articles/answer_comment', comment: comment

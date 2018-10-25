@@ -11,6 +11,8 @@
           = link_to 'Выход', destroy_user_session_path,
             class: 'log-out-icon link'
         .child-admin-panel
+          = link_to 'Комментарии', static_pages_comments_path, class: 'link'
+        .child-admin-panel
           = link_to t('articles.new').capitalize, new_article_path,
             class: 'link'
 

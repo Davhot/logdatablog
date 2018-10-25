@@ -1,5 +1,5 @@
 = simple_form_for Article::Comment.new,
-  url: create_comment_article_path, remote: true do |f|
+  url: create_comment_article_path(id: @item.id), remote: true do |f|
   = f.hidden_field :article_id, value: @item.id
   = f.hidden_field :auth_user_id, value: @auth_user.id
   = f.hidden_field :parent_id, value: comment.id

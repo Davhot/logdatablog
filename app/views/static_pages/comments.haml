@@ -1,0 +1,5 @@
+- @comments.each do |data|
+  %p= data[0]
+  - data[1].each do |comment|
+    - @item = comment.article
+    = render 'articles/comment', comment: comment
