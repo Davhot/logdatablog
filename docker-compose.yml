@@ -30,8 +30,5 @@ nginx:
     - "/share/logs/logdatablog_${RAILS_ENV}:/usr/src/app/log"
     - /home/david/ssl_sercificate:/usr/share/nginx/html/ssl_sercificate
   ports:
-    - "3000:443"
-    - "443:443"
-  expose:
-    - "443"
+    - "3000:80"
   restart: always
