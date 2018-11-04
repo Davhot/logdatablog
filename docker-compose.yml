@@ -5,9 +5,9 @@ app:
     - .:/usr/src/app
     - ./config/database.yml.default:/usr/src/app/config/database.yml
     - ./bundle:/usr/local/bundle
-    - ./public:/usr/share/nginx/html
+    - ./public:/usr/share/nginx/html/logdatablog
 
-    - /home/david/uploads:/usr/src/app/public/uploads
+    - /home/david/uploads/logdatablog:/usr/src/app/public/uploads
     - tmp:/usr/src/app/tmp
     - "/var/run/postgresql:/var/run/postgresql"
   env_file:
@@ -16,22 +16,19 @@ app:
   environment:
     RAILS_ENV: "${RAILS_ENV}"
   restart: always
-  expose:
-    - "3000"
 nginx:
   image: nginx
   links:
     - app
   volumes:
     - ./config/nginx.conf:/etc/nginx/nginx.conf
-    - ./public:/usr/share/nginx/html
+    - ./public:/usr/share/nginx/html/logdatablog
 
-    - /home/david/uploads:/usr/share/nginx/html/uploads
+    - /home/david/uploads/logdatablog:/usr/share/nginx/html/logdatablog/uploads
     - "/share/logs/logdatablog_${RAILS_ENV}:/usr/src/app/log"
-    - /home/david/ssl_sercificate:/usr/share/nginx/html/ssl_sercificate
+    - /home/david/ssl_certificates/logdatablog:/usr/share/nginx/html/ssl_certificates/logdatablog
   ports:
-    - "3000:443"
-    - "443:443"
+    - "3000:3000"
   expose:
-    - "443"
+    - "3000"
   restart: always

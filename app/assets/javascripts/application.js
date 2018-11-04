@@ -92,6 +92,7 @@ $(document).ready(function () {
         flowChart       : true,
         sequenceDiagram : true,
       });
-      $("#editormd-view p:has(img)").css({'text-align': 'center'})
+      $("#editormd-view p:has(img)").css({'text-align': 'center'});
+      $("#editormd-view img").click(function (e) {e.preventDefault();});
   })
 })

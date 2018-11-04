@@ -17,10 +17,9 @@ $ ->
     })
   $(".comment-content").click (e) ->
     e.preventDefault()
-    # $(this).focusout ->
-    #   url = $(this).data('url')
-    #   data = {content: $(this).text()}
-    #   $.ajax(url: url, data: data)
+
+  $("#editormd-view img").click (e) ->
+    e.preventDefault()
 
 show_comment_form = ->
   target = $(this).data('target')
