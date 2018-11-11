@@ -18,11 +18,11 @@ class ApplicationController < ActionController::Base
 
   def save_previous_redirect
     session[:unique_id] = 'qwerty' if Rails.env.development?
-    session[:return_to] ||= request.referer
+    # session[:return_to] ||= request.referer
   end
 
   protected
-  
+
   def authenticate_user!
     if user_signed_in?
       super

@@ -23,7 +23,7 @@ class AuthorizationsController < ApplicationController
       end
     end
     flash[message[0]] = message[1]
-    redirect_to session.delete(:return_to)
+    redirect_back(fallback_location: root_path)
   end
 
   private
