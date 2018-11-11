@@ -10,6 +10,7 @@ RUN gem pristine --all
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/log
 RUN mkdir -p /var/run/postgresql
+RUN mkdir -p /usr/src/dumps
 
 RUN chmod 755 /usr/src/app/log
 RUN chmod 755 /usr/src/app

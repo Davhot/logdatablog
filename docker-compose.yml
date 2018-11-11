@@ -10,6 +10,7 @@ app:
     - /home/david/uploads/logdatablog:/usr/src/app/public/uploads
     - tmp:/usr/src/app/tmp
     - "/var/run/postgresql:/var/run/postgresql"
+    - "../../dumps:/usr/src/app/dumps"
   env_file:
     - database.env
     - api_secret.env

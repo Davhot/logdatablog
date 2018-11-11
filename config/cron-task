@@ -1,0 +1,2 @@
+30 */6 * * * /usr/src/app/bin/copy_db_dump 1>>/usr/src/app/log/backup.log 2>&1
+14 22  * * * cd /usr/src/app/dumps/; find ./  -type f -mtime +15 -exec rm {} \;
