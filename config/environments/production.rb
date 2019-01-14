@@ -1,4 +1,7 @@
 Rails.application.configure do
+  require 'hot_catch/custom_log_subscribers.rb'
+  config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new('tmp/hot_catch_buf_file'))
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

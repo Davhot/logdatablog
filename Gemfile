@@ -32,6 +32,10 @@ gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
 gem 'coderay'
 
+gem 'hot_catch'
+gem 'sidekiq'
+gem "sidekiq-cron", "~> 0.6.3"
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
