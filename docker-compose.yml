@@ -38,25 +38,25 @@ nginx:
     - "3000"
   restart: always
 
-redis:
-  image: redis
-  volumes:
-    - ./config/redis.conf:/var/lib/redis.conf:ro
-    - redis:/var/lib/redis/data
-  ports:
-    - "6379:6379"
-  command: redis-server /var/lib/redis.conf
 sidekiq:
-  build: .
-  volumes:
-    - .:/usr/src/app
-    - bundle:/usr/local/bundle
-    - ./config/database.default.yml:/usr/src/app/config/database.yml
   links:
     - redis
+  build: .
+  command: bundle exec sidekiq -C config/sidekiq.yml -L log/sidekiq.log
+  volumes:
+    - .:/usr/src/app
+    - ./config/database.yml.default:/usr/src/app/config/database.yml
+    - bundle:/usr/local/bundle
   env_file:
     - database.env
   environment:
-    - "RAILS_ENV=${RAILS_ENV}"
-    - "REDIS_URL=redis://redis:6379/"
-  command: bundle exec sidekiq -C config/sidekiq.yml
+    RAILS_ENV: "${RAILS_ENV}"
+    REDIS_URL: redis://redis:6379/
+    RAILS_RELATIVE_URL_ROOT: /hotel
+
+redis:
+  image: redis
+  volumes:
+    - redis_data:/data
+  expose:
+    - "6379"
