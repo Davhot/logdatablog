@@ -11,6 +11,7 @@ app:
     - tmp:/usr/src/app/tmp
     - "/var/run/postgresql:/var/run/postgresql"
     - "../../dumps:/usr/src/app/dumps"
+    - "../../logs:/usr/src/app/log"
   env_file:
     - database.env
     - api_secret.env
@@ -26,7 +27,7 @@ nginx:
     - ./public:/usr/share/nginx/html/logdatablog
 
     - /home/david/uploads/logdatablog:/usr/share/nginx/html/logdatablog/uploads
-    - "/share/logs/logdatablog_${RAILS_ENV}:/usr/src/app/log"
+    - "../../logs:/usr/src/app/log"
     - /home/david/ssl_certificates/logdatablog:/usr/share/nginx/html/ssl_certificates/logdatablog
   ports:
     - "3000:3000"
