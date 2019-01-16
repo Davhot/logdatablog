@@ -42,17 +42,16 @@ sidekiq:
   links:
     - redis
   build: .
-  command: bundle exec sidekiq -C config/sidekiq.yml -L log/sidekiq.log
+  command: bundle exec sidekiq
   volumes:
     - .:/usr/src/app
     - ./config/database.yml.default:/usr/src/app/config/database.yml
-    - bundle:/usr/local/bundle
+    - ./bundle:/usr/local/bundle
   env_file:
     - database.env
   environment:
     RAILS_ENV: "${RAILS_ENV}"
     REDIS_URL: redis://redis:6379/
-    RAILS_RELATIVE_URL_ROOT: /hotel
 
 redis:
   image: redis

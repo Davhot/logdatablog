@@ -81,9 +81,6 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-rvm (0.1.2)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -293,7 +290,6 @@ DEPENDENCIES
   byebug
   capistrano (= 3.9.0)
   capistrano-docker!
-  capistrano-rvm
   coderay
   coffee-rails (~> 4.2)
   devise (~> 4.4.3)
@@ -313,7 +309,7 @@ DEPENDENCIES
   ransack
   sass-rails (~> 5.0)
   sidekiq
-  sidekiq-cron (~> 0.6.3)
+  sidekiq-cron
   simple_form (~> 4.0.1)
   spring
   spring-watcher-listen (~> 2.0.0)

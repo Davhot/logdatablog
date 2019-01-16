@@ -34,7 +34,7 @@ gem 'coderay'
 
 gem 'hot_catch'
 gem 'sidekiq'
-gem "sidekiq-cron", "~> 0.6.3"
+gem "sidekiq-cron"
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -53,6 +53,5 @@ gem 'tzinfo-data', platforms: %i(mingw mswin x64_mingw jruby)
 # Use Capistrano for deployment
 group :capistrano do
   gem 'capistrano', '3.9.0'
-  gem 'capistrano-rvm'
   gem 'capistrano-docker', git: 'https://github.com/netguru/capistrano-docker.git'
 end
