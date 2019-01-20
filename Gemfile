@@ -34,7 +34,7 @@ gem 'coderay'
 
 gem 'hot_catch'
 gem 'sidekiq'
-gem "sidekiq-cron"
+gem "sidekiq-cron", "~> 1.1"
 
 group :development, :test do
   gem 'byebug', platform: :mri
