@@ -6,12 +6,13 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-
 require_relative 'hot_catch_logger'
+
 module Logdatablog
   class Application < Rails::Application
     config.middleware.insert_before Rails::Rack::Logger, Rails::Rack::HotCatchLogger
-config.middleware.delete Rails::Rack::Logger
+    config.middleware.delete Rails::Rack::Logger
+
     config.time_zone = "Moscow"
     config.autoload_paths += %W(#{config.root}/lib)
     config.middleware.use ActionDispatch::Flash

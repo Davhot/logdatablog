@@ -1,4 +1,5 @@
 require 'sidekiq-cron'
+require 'hot_catch'
 Rails.application.config.sender_logs = HotCatch::MakeHttpsRequest.new
 if Sidekiq.server?
   Sidekiq::Cron::Job.create(name: 'NginxSystemWorker - every 1min', cron: '*/1 * * * *', class: 'NginxSystemWorker')
