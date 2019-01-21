@@ -119,8 +119,10 @@ GEM
       rake (>= 10, < 13)
       rubocop (>= 0.50.0)
       sysexits (~> 1.1)
-    hot_catch (0.1.4.1)
+    hot_catch (0.1.6.8)
+      server_metrics
       sidekiq
+      sidekiq-cron (~> 1.1)
     i18n (1.5.2)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.2)
@@ -227,6 +229,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    server_metrics (1.2.18)
     sidekiq (5.2.5)
       connection_pool (~> 2.2, >= 2.2.2)
       rack (>= 1.5.0)
@@ -288,7 +291,7 @@ DEPENDENCIES
   font-awesome-rails (~> 4.7.0.4)
   haml (~> 5.0.4)
   haml_lint
-  hot_catch
+  hot_catch (~> 0.1)
   jbuilder (~> 2.5)
   jquery-fileupload-rails (= 0.4.7)
   jquery-rails (~> 4.3.3)
