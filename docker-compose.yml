@@ -47,6 +47,7 @@ sidekiq:
     - .:/usr/src/app
     - ./config/database.yml.default:/usr/src/app/config/database.yml
     - ./bundle:/usr/local/bundle
+    - "../../logs:/usr/src/app/log"
   env_file:
     - database.env
   environment:
