@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       (user.updated_at + user.expires_in.to_i) < Time.current
       session.delete(:unique_id)
     end
-    @auth_user = ((session[:unique_id].present? && AuthUser.exists?(user)) ? user : nil)
+    @auth_user = ((session[:unique_id].present? && AuthUser.find_by(id: user.try(:id))) ? user : nil)
   end
 
   def save_previous_redirect

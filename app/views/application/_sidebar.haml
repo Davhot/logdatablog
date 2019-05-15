@@ -40,23 +40,24 @@
           %li= link_to 'Tutorial', tutorial_articles_path, class: 'link'
           %li= link_to 'About', static_pages_about_path, class: 'link'
           %li= link_to 'Contact', static_pages_contact_path, class: 'link'
-    %hr.sidebar-content-separate
-    #about-me
-      %h6 Обо мне
-      %p Разраб, студент и просто отличный парень
-    %hr.sidebar-content-separate
-    = simple_form_for Article.search(params).ransack(params[:q]), url: articles_path, method: :get do |f|
-      = f.input :title_or_content_or_describe_cont,
-        label: false,
-        required: false,
-        input_html: {class: 'form-control ds-input', autocomplete: 'off',
-          placeholder: 'Поиск...', type: 'search' }
-      = f.submit 'Go'
+    .d-none.d-sm-block
+      %hr.sidebar-content-separate
+      #about-me
+        %h6 Обо мне
+        %p Разраб, студент и просто отличный парень
+      %hr.sidebar-content-separate
+      = simple_form_for Article.search(params).ransack(params[:q]), url: articles_path, method: :get do |f|
+        = f.input :title_or_content_or_describe_cont,
+          label: false,
+          required: false,
+          input_html: {class: 'form-control ds-input', autocomplete: 'off',
+            placeholder: 'Поиск...', type: 'search' }
+        = f.submit 'Go'
     %hr.sidebar-content-separate
     %div
       %h6 Последние посты
       %ul.links-sidebar
-        - Article.all.last(5).each do |article|
+        - Article.all.first(5).each do |article|
           %li= link_to content_tag(:p, article.title), article_path(article),
             class: 'link'
     %hr.sidebar-content-separate

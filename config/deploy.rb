@@ -17,7 +17,7 @@ namespace :docker do
     task :bundle do
       on roles(:app) do
         within release_path do
-          execute :"docker-compose", compose_run_command(:app, "bundle install --system --without test --jobs $(nproc)")
+          execute :"docker-compose", compose_run_command(:app, "bundle install --without development test --jobs $(nproc) --path=/usr/local/bundle")
           #  Нужно только при первом запуске в новом(в новь созданном) контейнере
           ## execute :"docker-compose", compose_run_command(:app, "gem pristine --all")
         end

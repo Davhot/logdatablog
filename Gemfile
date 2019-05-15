@@ -32,6 +32,10 @@ gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
 gem 'coderay'
 
+gem 'hot_catch', '~> 0.1'
+gem 'sidekiq'
+gem "sidekiq-cron", "~> 1.1"
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
@@ -49,6 +53,5 @@ gem 'tzinfo-data', platforms: %i(mingw mswin x64_mingw jruby)
 # Use Capistrano for deployment
 group :capistrano do
   gem 'capistrano', '3.9.0'
-  gem 'capistrano-rvm'
   gem 'capistrano-docker', git: 'https://github.com/netguru/capistrano-docker.git'
 end

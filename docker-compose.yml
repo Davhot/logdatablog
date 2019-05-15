@@ -11,12 +11,16 @@ app:
     - tmp:/usr/src/app/tmp
     - "/var/run/postgresql:/var/run/postgresql"
     - "../../dumps:/usr/src/app/dumps"
+    - "../../logs:/usr/src/app/log"
   env_file:
     - database.env
     - api_secret.env
   environment:
     RAILS_ENV: "${RAILS_ENV}"
+    REDIS_URL: redis://redis:6379/
   restart: always
+  links:
+    - redis
 nginx:
   image: nginx
   links:
@@ -26,10 +30,33 @@ nginx:
     - ./public:/usr/share/nginx/html/logdatablog
 
     - /home/david/uploads/logdatablog:/usr/share/nginx/html/logdatablog/uploads
-    - "/share/logs/logdatablog_${RAILS_ENV}:/usr/src/app/log"
+    - "../../logs:/var/log"
     - /home/david/ssl_certificates/logdatablog:/usr/share/nginx/html/ssl_certificates/logdatablog
   ports:
     - "3000:3000"
   expose:
     - "3000"
   restart: always
+
+sidekiq:
+  links:
+    - redis
+  build: .
+  command: bundle exec sidekiq
+  volumes:
+    - .:/usr/src/app
+    - ./config/database.yml.default:/usr/src/app/config/database.yml
+    - ./bundle:/usr/local/bundle
+    - "../../logs:/usr/src/app/log"
+  env_file:
+    - database.env
+  environment:
+    RAILS_ENV: "${RAILS_ENV}"
+    REDIS_URL: redis://redis:6379/
+
+redis:
+  image: redis
+  volumes:
+    - redis_data:/data
+  expose:
+    - "6379"

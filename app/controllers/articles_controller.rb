@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     end
     @items = @items
       .where
-      .not(id: Article.unscoped.joins(:tags).where(tags: {name: 'Tutorial'}).uniq.ids)
+      .not(id: Article.unscoped.joins(:tags).where(tags: {name: 'Tutorial'}).distinct.ids)
       .page(params[:page])
   end
 
