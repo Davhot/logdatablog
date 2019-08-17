@@ -30,7 +30,7 @@ nginx:
     - ./public:/usr/share/nginx/html/logdatablog
 
     - /home/david/uploads/logdatablog:/usr/share/nginx/html/logdatablog/uploads
-    - "../../logs:/var/log"
+    - "/share/logs/logdatablog_${RAILS_ENV}:/usr/src/app/log"
     - /home/david/ssl_certificates/logdatablog:/usr/share/nginx/html/ssl_certificates/logdatablog
   ports:
     - "3000:3000"
