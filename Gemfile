@@ -24,7 +24,7 @@ gem 'bootstrap', '~> 4.1.3'
 
 gem 'font-awesome-rails', '~> 4.7.0.4'
 gem 'haml', '~> 5.0.4'
-gem 'devise', '~> 4.4.3'
+gem 'devise', '~> 4.7.1'
 gem 'haml_lint', require: false
 gem 'simple_form', '~> 4.0.1'
 gem 'ransack'
