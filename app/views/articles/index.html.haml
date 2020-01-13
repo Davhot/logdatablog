@@ -19,14 +19,12 @@
             - article.reload.tags.each do |tag|
               %span.badge.badge-pill.badge-secondary= tag.name
         .col-md-6.text-right.d-none.d-md-block
-          %p.card-text= distance_of_time_in_words(article.created_at,
-            Time.now, locale: :en) + ' ago'
+          = render 'application/time', created_time: article.created_at, updated_time:  article.updated_at
           %p
             %i.fa.fa-eye
             = article.views
         .col-md-6.text-left.d-md-none
-          %p.card-text= distance_of_time_in_words(article.created_at,
-            Time.now, locale: :en) + ' ago'
+          = render 'application/time', created_time: article.created_at, updated_time:  article.updated_at
           %p
             %i.fa.fa-eye
             = article.views

@@ -21,41 +21,6 @@
           %tbody#article-files-not-for-content
             - @item.files_not_for_content.each do |article_file|
               = render 'article_file', article_file: article_file
-  .row
-    .col-md-12
-      #article_comments
-        - @comments.each do |comment|
-          = render 'comment', comment: comment
-          - comment.tree.each do |children_comment|
-            = render 'comment', comment: children_comment
-  .row#comment-0-form
-    .col-md-12
-      - if @auth_user.present?
-        = simple_form_for Article::Comment.new,
-          url: create_comment_article_path, remote: true do |f|
-          = f.hidden_field :article_id, value: @item.id
-          = f.hidden_field :auth_user_id, value: @auth_user.id
-          .auth_user_container
-            - if @auth_user.user.present?
-              = image_tag 'a2'
-              %p Admin
-            - else
-              = image_tag @auth_user.photo_url
-              %p
-                = @auth_user.first_name
-                = @auth_user.last_name
-          .form-group.article_comment_form_container
-            = f.input :content,
-              input_html: { class: "message", rows: '3', placeholder: 'Введите комментарий...' },
-              label: false
-            %ul.errors
-            = f.submit 'Отправить', class: 'btn btn-outline-secondary'
-      - else
-        #comments-wrapper
-          %p Авторизуйтсь, чтобы оставлять комментарии
-          .socials
-            = link_to content_tag(:i, nil, class: 'fa fa-vk'), vk_url,
-              { class: 'social vk' }
   .card-footer.text-muted
     .row
       .col-md-6.text-left
@@ -66,14 +31,12 @@
           - @item.tags.each do |tag|
             %span.badge.badge-pill.badge-secondary= tag.name
       .col-md-6.text-right.d-none.d-md-block
-        %p.card-text= distance_of_time_in_words(@item.created_at,
-          Time.now, locale: :en) + ' ago'
+        = render 'application/time', created_time: @item.created_at, updated_time: @item.updated_at
         %p
           %i.fa.fa-eye
           = @item.views
       .col-md-6.text-left.d-md-none
-        %p.card-text= distance_of_time_in_words(@item.created_at,
-          Time.now, locale: :en) + ' ago'
+        = render 'application/time', created_time: @item.created_at, updated_time: @item.updated_at
         %p
           %i.fa.fa-eye
           = @item.views

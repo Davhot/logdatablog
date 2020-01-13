@@ -11,8 +11,6 @@
           = link_to 'Выход', destroy_user_session_path,
             class: 'log-out-icon link'
         .child-admin-panel
-          = link_to 'Комментарии', static_pages_comments_path, class: 'link'
-        .child-admin-panel
           = link_to t('articles.new').capitalize, new_article_path,
             class: 'link'
 
@@ -20,7 +18,6 @@
       = image_tag 'a2', id: 'avatar'
       %strong David
       %p Join me&nbsp;
-      %b david.home@mail.ru
       .social-media-icons
         %ul
           %li
@@ -39,12 +36,7 @@
           %li= link_to 'Home', root_path, class: 'link'
           %li= link_to 'Tutorial', tutorial_articles_path, class: 'link'
           %li= link_to 'About', static_pages_about_path, class: 'link'
-          %li= link_to 'Contact', static_pages_contact_path, class: 'link'
     .d-none.d-sm-block
-      %hr.sidebar-content-separate
-      #about-me
-        %h6 Обо мне
-        %p Разраб, студент и просто отличный парень
       %hr.sidebar-content-separate
       = simple_form_for Article.search(params).ransack(params[:q]), url: articles_path, method: :get do |f|
         = f.input :title_or_content_or_describe_cont,
