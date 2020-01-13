@@ -26,7 +26,7 @@ gem 'font-awesome-rails', '~> 4.7.0.4'
 gem 'haml', '~> 5.0.4'
 gem 'devise', '~> 4.7.1'
 gem 'haml_lint', require: false
-gem 'simple_form', '~> 4.0.1'
+gem 'simple_form', '~> 5.0.0'
 gem 'ransack'
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
