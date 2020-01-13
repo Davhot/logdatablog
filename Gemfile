@@ -20,7 +20,7 @@ gem 'jquery-fileupload-rails', '0.4.7'
 
 gem 'jbuilder', '~> 2.5'
 
-gem 'bootstrap', '~> 4.1.3'
+gem 'bootstrap', '~> 4.3.1'
 
 gem 'font-awesome-rails', '~> 4.7.0.4'
 gem 'haml', '~> 5.0.4'
