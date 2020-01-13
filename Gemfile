@@ -32,7 +32,6 @@ gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
 gem 'coderay'
 
-gem 'hot_catch', '~> 0.1'
 gem 'sidekiq'
 gem "sidekiq-cron", "~> 1.1"
 

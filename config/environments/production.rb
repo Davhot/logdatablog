@@ -1,8 +1,5 @@
 Rails.application.configure do
-  require 'hot_catch/custom_log_subscribers.rb'
-  config.logger = ActiveSupport::TaggedLogging.new(ActiveSupport::Logger.new('tmp/hot_catch_buf_file'))
-
-  # Settings specified here will take precedence over those in config/application.rb.
+# Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.cache_classes = false
@@ -103,5 +100,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.force_ssl = true
+  # config.force_ssl = true
 end
