@@ -1,4 +1,4 @@
-class CreateAuthUsers < ActiveRecord::Migration[5.0]
+class CreateAuthUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :auth_users do |t|
       t.string :access_token

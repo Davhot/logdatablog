@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.0.5'
+gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
@@ -24,7 +24,7 @@ gem 'bootstrap', '~> 4.1.3'
 
 gem 'font-awesome-rails', '~> 4.7.0.4'
 gem 'haml', '~> 5.0.4'
-gem 'devise', '~> 4.4.3'
+gem 'devise', '~> 4.7.1'
 gem 'haml_lint', require: false
 gem 'simple_form', '~> 4.0.1'
 gem 'ransack'

@@ -1,4 +1,4 @@
-class CreateArticleFiles < ActiveRecord::Migration[5.0]
+class CreateArticleFiles < ActiveRecord::Migration[5.2]
   def change
     create_table :article_files do |t|
       t.string :original_filename, null: false
