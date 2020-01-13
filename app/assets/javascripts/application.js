@@ -33,66 +33,69 @@
 //= require article
 //= require static_pages
 
-$(document).ready(function () {
+$(document).ready(function() {
   $(".multiselect").multiSelect({
     selectableHeader: "<div class='custom-header'>Варианты выбора</div>",
     selectionHeader: "<div class='custom-header'>Выбранные элементы</div>"
   });
 
-  $('#scrollup').mouseover( function(){
-		$( this ).animate({opacity: 0.65},100);
-	}).mouseout( function(){
-		$( this ).animate({opacity: 1},100);
-	}).click( function(){
-		window.scroll(0 ,0);
-		return false;
-	});
+  $('#scrollup').click(function() {
+    window.scroll(0, 0);
+    return false;
+  });
 
-  $(window).scroll(function(){
-    var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-		if ( $(document).scrollTop() > 0 && scrollBottom > 0) {
-			$('#scrollup').fadeIn('fast');
-		} else {
-			$('#scrollup').fadeOut('fast');
-		}
-	});
+  var fade_scrollup = false;
+  display_scrollup();
+  $(window).scroll(function() { display_scrollup(); });
+
+  function display_scrollup() {
+    if ($(document).scrollTop() > 100 && !fade_scrollup) {
+      fade_scrollup = true;
+      $('#scrollup').show();
+    } else if ($(document).scrollTop() <= 100 && fade_scrollup) {
+      fade_scrollup = false;
+      $('#scrollup').hide();
+    }
+  }
 
   $('[data-toggle="tooltip"]').tooltip();
 
-
-  if ($("#test-editormd").length > 0){
+  if ($("#test-editormd").length > 0) {
     var testEditor;
     $(function() {
-        testEditor = editormd("test-editormd", {
-            width           : "100%",
-            height          : "600",
-            path            : "/assets/lib/",
-            htmlDecode      : "style,script,iframe",
-            tex             : true,
-            emoji           : true,
-            taskList        : true,
-            flowChart       : true,
-            sequenceDiagram : true,
-            imageUpload     : true,
-            imageFormats    : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL  : $("#test-editormd").data('url'), // TODO: загрузка изображения на URL
-        });
+      testEditor = editormd("test-editormd", {
+        width: "100%",
+        height: "600",
+        path: "/assets/lib/",
+        htmlDecode: "style,script,iframe",
+        tex: true,
+        emoji: true,
+        taskList: true,
+        flowChart: true,
+        sequenceDiagram: true,
+        imageUpload: true,
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL: $("#test-editormd").data('url'), // TODO: загрузка изображения на URL
+      });
     });
   }
 
-
   var editormd_view;
   $(function() {
-      editormd_view = editormd.markdownToHTML("editormd-view", {
-        path            : "/assets/lib/",
-        htmlDecode      : "style,script,iframe",  // you can filter tags decode
-        emoji           : true,
-        taskList        : true,
-        tex             : true,
-        flowChart       : true,
-        sequenceDiagram : true,
-      });
-      $("#editormd-view p:has(img)").css({'text-align': 'center'});
-      $("#editormd-view img").click(function (e) {e.preventDefault();});
+    editormd_view = editormd.markdownToHTML("editormd-view", {
+      path: "/assets/lib/",
+      htmlDecode: "style,script,iframe", // you can filter tags decode
+      emoji: true,
+      taskList: true,
+      tex: true,
+      flowChart: true,
+      sequenceDiagram: true,
+    });
+    $("#editormd-view p:has(img)").css({
+      'text-align': 'center'
+    });
+    $("#editormd-view img").click(function(e) {
+      e.preventDefault();
+    });
   })
 })
