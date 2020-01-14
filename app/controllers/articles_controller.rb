@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :download_file,
-    :create_comment, :delete_comment, :edit_comment, :tutorial]
+  before_action :authenticate_user!, except: %i[index show download_file
+                                                create_comment delete_comment edit_comment tutorial]
   before_action :set_breadcrumbs, except: [:index]
-  before_action :set_article, only: %i(show edit update destroy create_comment)
-  before_action :set_article_files, only: %i(edit update)
-  before_action :set_article_images, only: %i(load_editor_image edit update new
-    create)
-  before_action :set_files_without_article, only: %i(new create)
+  before_action :set_article, only: %i[show edit update destroy create_comment]
+  before_action :set_article_files, only: %i[edit update]
+  before_action :set_article_images, only: %i[load_editor_image edit update new
+                                              create]
+  before_action :set_files_without_article, only: %i[new create]
 
   # TODO: генерить форму загрузки images с authenticity_token
   skip_before_action :verify_authenticity_token, only: :upload_image
@@ -16,12 +18,11 @@ class ArticlesController < ApplicationController
     @items = (@q = Article.search(params).ransack(params[:q])).result
     if @items.blank?
       @items = Article.all
-      flash.now[:error] = "Не найдено ни одной статьи"
+      flash.now[:error] = 'Не найдено ни одной статьи'
     end
-    @items = @items
-      .where
-      .not(id: Article.unscoped.joins(:tags).where(tags: {name: 'Tutorial'}).distinct.ids)
-      .page(params[:page])
+    @items = @items.where
+                   .not(id: Article.unscoped.joins(:tags).where(tags: { name: 'Tutorial' }).distinct.ids)
+                   .page(params[:page])
   end
 
   def tutorial
@@ -29,9 +30,9 @@ class ArticlesController < ApplicationController
     @items = (@q = Article.search(params).ransack(params[:q])).result
     if @items.blank?
       @items = Article.all
-      flash.now[:error] = "Не найдено ни одной статьи"
+      flash.now[:error] = 'Не найдено ни одной статьи'
     end
-    @items = @items.includes(:tags).where(tags: {name: 'Tutorial'}).uniq.page params[:page]
+    @items = @items.includes(:tags).where(tags: { name: 'Tutorial' }).page params[:page]
     render 'index'
   end
 
@@ -51,19 +52,18 @@ class ArticlesController < ApplicationController
     @item.files = @article_files
     @item.files << @article_images
     if @item.save
-      redirect_to root_path, flash: {success: 'Статья успешно создана'}
+      redirect_to root_path, flash: { success: 'Статья успешно создана' }
     else
       # @id_form = params["id_form"]
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @item.update_attributes(article_params)
-      redirect_to article_path(@item), flash: {success: 'Статья успешно обновлена'}
+      redirect_to article_path(@item), flash: { success: 'Статья успешно обновлена' }
     else
       render :edit
     end
@@ -72,40 +72,39 @@ class ArticlesController < ApplicationController
   def destroy
     path = session[:tutorial] ? tutorial_articles_path : articles_path
     if @item.destroy
-      redirect_to path, flash: {success: 'Статья успешно удалена'}
+      redirect_to path, flash: { success: 'Статья успешно удалена' }
     else
-      redirect_to path, flash: {error: 'Статья не удалена'}
+      redirect_to path, flash: { error: 'Статья не удалена' }
     end
   end
 
   def upload_file
     if params[:id].present?
-      @article_file = Article::File.create_from_file(params["file"],
-        params["id"], current_user, false)
+      @article_file = Article::File.create_from_file(params['file'],
+                                                     params['id'], current_user, false)
     else
-      @article_file = Article::File.create_from_file(params["file"], nil,
-        current_user, false)
+      @article_file = Article::File.create_from_file(params['file'], nil,
+                                                     current_user, false)
     end
   end
 
   def upload_image
     if params[:id].present?
-      @article_image = Article::File.create_from_file(params["editormd-image-file"],
-        params["id"], current_user, true)
+      @article_image = Article::File.create_from_file(params['editormd-image-file'],
+                                                      params['id'], current_user, true)
       @load_editor_image_path = load_editor_image_articles_path(id: params[:id])
     else
-      @article_image = Article::File.create_from_file(params["editormd-image-file"],
-        nil, current_user, true)
+      @article_image = Article::File.create_from_file(params['editormd-image-file'],
+                                                      nil, current_user, true)
       @load_editor_image_path = load_editor_image_articles_path
     end
-    render json: {address: root_path + @article_image.server_path,
-      title: @article_image.original_filename, status: 200,
-      load_editor_image_path: @load_editor_image_path,
-      message: 'Изображение загружено!'}
+    render json: { address: root_path + @article_image.server_path,
+                   title: @article_image.original_filename, status: 200,
+                   load_editor_image_path: @load_editor_image_path,
+                   message: 'Изображение загружено!' }
   end
 
-  def load_editor_image
-  end
+  def load_editor_image; end
 
   def download_file
     doc = Article::File.find(params[:id])
@@ -115,11 +114,11 @@ class ArticlesController < ApplicationController
   def delete_file
     doc = Article::File.find(params[:id])
     @item = doc.article
-    if @item.present?
-      @article_images = @item.files.where(for_content: true)
-    else
-      @article_images = Article::File.where(for_content: true, article_id: nil)
-    end
+    @article_images = if @item.present?
+                        @item.files.where(for_content: true)
+                      else
+                        Article::File.where(for_content: true, article_id: nil)
+                      end
     if current_user.present? && doc.user == current_user
       @doc_id = doc.id
       doc.destroy
@@ -129,7 +128,7 @@ class ArticlesController < ApplicationController
   def create_comment
     if params['article_comment']['parent_id'].present?
       @comment_id = Article::Comment.find(params['article_comment']['parent_id'])
-        .right_leaf.id
+                                    .right_leaf.id
     end
     @article_comment = Article::Comment.create(article_comment_params)
   end
@@ -174,7 +173,7 @@ class ArticlesController < ApplicationController
 
   def article_comment_params
     params.require(:article_comment).permit(:content, :parent_id, :article_id,
-      :auth_user_id, :parent_id)
+                                            :auth_user_id, :parent_id)
   end
 
   def article_params
